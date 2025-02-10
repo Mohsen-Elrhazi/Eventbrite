@@ -27,7 +27,7 @@ class Database {
 
                 self::$conn = new PDO("pgsql:host=$host;port=$port;dbname=$db_name", $username, $password);
                  
-                echo "connection etablie";
+                // echo "connection etablie";
                 return self::$conn;
             } catch (PDOException $e) {
                 die("Erreur de connexion : " . $e->getMessage());
