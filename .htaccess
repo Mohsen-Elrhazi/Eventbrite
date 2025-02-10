@@ -1,9 +1,13 @@
 RewriteEngine On
-RewriteBase /
 
-# Si le fichier ou dossier existe, ne pas rediriger
+# Ignore requests for existing files and directories
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# Rediriger toutes les requêtes vers index.php dans le dossier public
+# Redirect all other requests to public/index.php
+RewriteCond %{REQUEST_URI} !^/public/
 RewriteRule ^(.*)$ /public/index.php [QSA,L]
+
+# Handle the root path specifically
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule ^$ /public/index.php [QSA,L]

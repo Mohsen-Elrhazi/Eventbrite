@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <link rel="stylesheet" href="/assets/css/Auth/auth.css">
+    <link rel="stylesheet" href="/public/assets/css/Auth/auth.css">
 </head>
 
 <body>
@@ -87,17 +87,17 @@
                 <p class="divider">Ou continuer avec</p>
                 <div class="social-buttons">
                     <button class="btn btn-social btn-google">
-                        <img src="/assets/images/google.png" alt="Google Logo">Google
+                        <img src="/public/assets/images/google.png" alt="Google Logo">Google
                     </button>
                     <button class="btn btn-social btn-facebook">
-                        <img src="/assets/images/facebook.png" alt="Facebook Logo">Facebook
+                        <img src="/public/assets/images/facebook.png" alt="Facebook Logo">Facebook
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="/assets/js/Auth/auth.js">
+    <script src="/public/assets/js/Auth/auth.js">
     </script>
 </body>
 
