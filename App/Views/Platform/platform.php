@@ -45,8 +45,8 @@
 
         <div class="navbar-right">
             <a href="#" class="business-link">Udemy Business</a>
-            <a href="../../../index.php?page=login" class="login-btn">Se connecter</a>
-            <a href="auth/register" class="signup-btn">S'inscrire</a>
+            <a href="/auth/auth" class="login-btn" id="login-btn">Se connecter</a>
+            <a href="/auth/auth" class="signup-btn" id="signup-btn">S'inscrire</a>
             <a href="../../../index.php?page=logout" class="signup-btn">Logout</a>
             <div class="cart-container">
                 <i class="fas fa-shopping-cart cart-icon"></i>
@@ -165,7 +165,7 @@
 
     <!-- affichage des courses -->
     <section class="content">
-        <h2 style="text-align:center;">Courses </h2>
+        <h2 style="text-align:center;">Events </h2>
 
         <div class='cards-cours'>
 
@@ -259,7 +259,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
 
-    <script src="../../../public/assets/js/Platform/platform.js"></script>
+    <script src="/assets/js/Platform/platform.js">
+    </script>
+
+
 
 </body>
 

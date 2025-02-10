@@ -56,7 +56,6 @@ class Router{
                 $objectController->{$this->method}($this->param);
             }else{
                 $objectController->{$this->method}();
-                
             }
          }else{
             $errorController=new ErrorController();
