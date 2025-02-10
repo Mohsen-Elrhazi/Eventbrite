@@ -55,5 +55,34 @@ class AuthController
     }
 
 
-    public function login() {}
+    public function login()
+    {
+        $email = htmlspecialchars($_POST['email']);
+        $password = htmlspecialchars($_POST['password']);
+
+        if (Validation::validateFields([$email, $password])) {
+            $user = $this->userRepository->getUserByEmail($email);
+
+            if ($user) {
+                if (password_verify($password, $user['password'])) {
+                    //session Role
+
+                    header("location:/platform");
+                    exit;
+                } else {
+                    //session error "Mot de pass incorrect";
+
+                    header("Location:/login");
+                }
+            } else {
+                //session error "Aucun utilisateur trouvé avec cet email";
+
+                header("Location:/login");
+            }
+        }else{
+            //session error "Veuiller remplir tous les champs";
+
+            header("Location:/login");
+         }
+    }
 }
