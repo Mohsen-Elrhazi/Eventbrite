@@ -24,7 +24,6 @@ class Router{
             $controller = ucfirst($controller) . "Controller";
             $this->controller = "App\Controllers\\" . $controller;
         if(!class_exists($this->controller)){
-            // require_once dirname(__DIR__, 1) . '/Views/ErrorPages/error404.php';
             $errorController=new ErrorController();
             $errorController->error404();
             exit;
