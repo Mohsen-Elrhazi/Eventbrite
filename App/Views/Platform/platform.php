@@ -44,7 +44,7 @@
         </div>
 
         <div class="navbar-right">
-            <a href="#" class="business-link">Udemy Business</a>
+            <!-- <a href="#" class="business-link">Udemy Business</a> -->
             <a href="/auth/auth" class="login-btn" id="login-btn">Se connecter</a>
             <a href="/auth/auth" class="signup-btn" id="signup-btn">S'inscrire</a>
             <a href="../../../index.php?page=logout" class="signup-btn">Logout</a>
