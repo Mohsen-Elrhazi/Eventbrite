@@ -37,8 +37,8 @@
                 <div class="form-group">
                     <select id="role" name="role">
                         <option value="" disabled selected>Choisissez un rôle</option>
-                        <option value="participant">Participant</option>
-                        <option value="organisateur">Organisateur</option>
+                        <option value="Participant">Participant</option>
+                        <option value="Organisateur">Organisateur</option>
                     </select>
                     <label for="role">Rôle</label>
                 </div>
