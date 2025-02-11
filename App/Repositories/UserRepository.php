@@ -23,6 +23,7 @@ class UserRepository{
             ':role' => $user->getRole(),
             ':status' => $user->getStatus()
         ]);
+        
     }
 
     public function findByEmail($email):bool {

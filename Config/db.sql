@@ -47,7 +47,6 @@ CREATE TABLE event_user (
     CONSTRAINT fk_event FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE,
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
-
 --! pas encore creer dans base de données
 CREATE TABLE tickets (
     ticket_id SERIAL PRIMARY KEY,
@@ -58,7 +57,6 @@ CREATE TABLE tickets (
     CONSTRAINT fk_event FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE,
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
-
 --! pas encore creer dans base de données
 CREATE TABLE payments (
     payment_id SERIAL PRIMARY KEY,
@@ -71,3 +69,4 @@ CREATE TABLE payments (
     CONSTRAINT fk_ticket FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id) ON DELETE CASCADE,
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
+
