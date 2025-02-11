@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use App\Services\Validation;
+use App\Core\Session;
 
 class AuthController
 {
@@ -23,19 +24,20 @@ class AuthController
 
     public function register(): void
     {
-        $nom = htmlspecialchars(string: $_POST["nom"]);
-        $prenom = htmlspecialchars(string: $_POST["prenom"]);
-        $image = htmlspecialchars(string: $_POST["image"]);
-        $email = htmlspecialchars(string: $_POST["email"]);
-        $password = htmlspecialchars(string: $_POST["password"]);
-        $role = htmlspecialchars(string: $_POST["role"]);
+        $nom = htmlspecialchars($_POST["nom"]);
+        $prenom = htmlspecialchars($_POST["prenom"]);
+        $image = htmlspecialchars($_POST["image"]);
+        $email = htmlspecialchars($_POST["email"]);
+        $password = htmlspecialchars($_POST["password"]);
+        $role = htmlspecialchars($_POST["role"]);
 
         if (Validation::validateFields([$nom, $prenom, $image, $email, $password, $role])) {
 
             if ($this->userRepository->findByEmail($email)) {
-                $_SESSION['error'] = "Cet email est déjà utilisé.";
+                Session::setSession('error', 'Cet email est déjà utilisé.');
                 header("Location:/auth/auth");
                 exit;
+                
             } else {
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -44,12 +46,12 @@ class AuthController
                 $this->userRepository->save($user);
 
                 header("Location:/auth/auth");
-                $_SESSION['success'] = "Vous êtes inscrit avec succès!";
+                Session::setSession('success', 'Vous êtes inscrit avec succès!');
                 exit;
             }
         } else {
-            $_SESSION['error'] = "Veuillez remplir tous les champs correctement.";
-            header("Location:/auth/auth");
+            Session::setSession('error', 'Veuillez remplir tous les champs correctement.');
+            // header("Location:/auth/auth");
             exit;
         }
     }
@@ -65,24 +67,58 @@ class AuthController
 
             if ($user) {
                 if (password_verify($password, $user['password'])) {
-                    //session Role
+                    Session::setSession('user_id', $user['user_id']);
+                    Session::setSession('email', $user['email']);
+                    Session::setSession('role', $user['role']);
+                    Session::setSession('status', $user['status']);
 
-                    header("location:/platform");
-                    exit;
+                //     switch (Session::getSession('role')) {
+                //         case 'Admin':
+                //             header("location:/admin/admin");
+                //             exit();
+                    
+                //         case 'Organisateur':
+                //             if (Session::getSession('status') === 'Active') {
+                //                 header("location:/organisateur/organisateur");
+                //                 exit();
+                //             } else {
+                //                 Session::setSession('error', 'Votre compte a été désactivé');
+                //                 header("Location:/auth/auth");
+                //                 exit();
+                //             }
+                    
+                //         case 'Participant':
+                //             if (Session::getSession('status') === 'Active') {
+                //                 header("location:/platform");
+                //                 exit();
+                //             } else {
+                //                 Session::setSession('error', 'Votre compte a été désactivé');
+                //                 header("Location:/auth/auth");
+                //                 exit();
+                //             }
+                    
+                //         default:
+                //         Session::setSession('error', 'Rôle ou statut invalide.');
+                //             header("Location:/auth/auth");
+                //             exit();
+                //     }
+
                 } else {
-                    //session error "Mot de pass incorrect";
-
-                    header("Location:/login");
+                 Session::setSession('error', 'Mot de pass incorrect');
+                // echo Session::getSession('error');
+                //     header("Location:/login");
                 }
             } else {
-                //session error "Aucun utilisateur trouvé avec cet email";
+                Session::setSession('error', 'Aucun utilisateur trouvé avec cet email');
+        //    echo  Session::getSession('error');
 
-                header("Location:/login");
+                // header("Location:/login");
             }
         }else{
-            //session error "Veuiller remplir tous les champs";
+            Session::setSession('error', 'Veuiller remplir tous les champs');
+        //    echo  Session::getSession('error');
 
-            header("Location:/login");
+            header("Location:/auth/auth");
          }
     }
 }

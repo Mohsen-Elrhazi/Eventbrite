@@ -49,7 +49,6 @@ class Router{
          $this->param= $uri[2];  
          }
 
-
          if(method_exists($objectController, $this->method)){
             if(!empty($this->param)){
                 $objectController->{$this->method}($this->param);

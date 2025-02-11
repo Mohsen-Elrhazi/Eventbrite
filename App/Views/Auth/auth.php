@@ -1,3 +1,6 @@
+<?php 
+use App\Core\Session;
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,7 +16,9 @@
 
 <body>
     <div class="container">
+        <?php echo Session::getSession('error'); ?>
         <div class="form-wrapper">
+
             <!-- Onglets pour basculer entre Register et Login -->
             <div class="tabs">
                 <button class="tab " data-tab="register">S'inscrire</button>
@@ -56,6 +61,8 @@
 
             <!-- Formulaire de connexion -->
             <form id="login-form" class="form" action="/auth/login" method="POST">
+
+
                 <div class="form-group">
                     <input type="email" id="email-login" name="email" placeholder=" ">
                     <label for="email-login">Email</label>
