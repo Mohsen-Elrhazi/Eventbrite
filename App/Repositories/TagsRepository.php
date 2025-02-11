@@ -2,16 +2,12 @@
 
 namespace App\Repositories;
 
-use Config\Database;
 use App\Models\Tags;
 use PDO;
 use InvalidArgumentException;
 
 class TagsRepository extends BaseRepository {
-    public function __construct(){
-        $this->conn = Database::getConnection();
-    }
-
+  
     public function save(object $object) {
         if (!$object instanceof Tags) {
             throw new InvalidArgumentException("L'objet doit être une instance de tags");
@@ -22,9 +18,6 @@ class TagsRepository extends BaseRepository {
             ':nom' => $object->getNom(),
         ]);
     }
-
-
-   // function afficher les categories
    public function display() {
     $stmt = $this->conn->prepare("SELECT * FROM tags ORDER BY tag_id ASC");
     $stmt->execute(); 
@@ -36,17 +29,11 @@ class TagsRepository extends BaseRepository {
     }
     return $data;
 }
-
-
-    // delete category
     public function delete($id) {
         $stmt = $this->conn->prepare("DELETE FROM tag WHERE tag_id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute(); 
     }
-    
-
-    // function edit category
     public function edit(object $object) {
         if ($object instanceof Tags) {
             $stmt = $this->conn->prepare("UPDATE tags SET nom = :nom WHERE tag_id = :id");
@@ -61,9 +48,6 @@ class TagsRepository extends BaseRepository {
             throw new InvalidArgumentException("L'objet passé n'est pas une instance de tags.");
         }
     }
-    
-
-    // function trouver un objet par son id
     public function findById($id) {
         $stmt = $this->conn->prepare("SELECT * FROM tags WHERE tag_id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -74,7 +58,6 @@ class TagsRepository extends BaseRepository {
         if ($tag) {
             return new Tags($tag['nom'],  $tag['tag_id']);
         }
-        
         return null; 
     }
     

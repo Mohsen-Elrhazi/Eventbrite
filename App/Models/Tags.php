@@ -5,6 +5,7 @@ class Tags{
     private  $nom;
     public function __construct($nom, $tag_id= null){
         $this->nom= $nom;
+        $this->tag_id=$tag_id;
         }
     public function getTagId(){
         return $this->tag_id;
