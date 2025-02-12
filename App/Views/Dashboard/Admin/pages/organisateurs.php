@@ -1,6 +1,4 @@
 <?php
-echo "Page des organisateurs";
-
 use App\Controllers\AdminController;
 
 $adminController = new AdminController();
@@ -19,6 +17,8 @@ $organisateurs = $adminController->displayOrganisateur();
 </head>
 
 <body class="bg-light">
+    <?php  require_once dirname(__DIR__) . '../../../Includes/messages.php';  ?>
+
 
     <div class="container mt-5">
         <h2 class="text-center mb-4">Liste des Organisateurs</h2>
@@ -35,7 +35,7 @@ $organisateurs = $adminController->displayOrganisateur();
                 </thead>
                 <tbody>
                     <?php foreach ($organisateurs as $organisateur) : ?>
-                        <?php echo $adminController->rederRow(organisateur: $organisateur); ?>
+                    <?php echo $adminController->rederRow(organisateur: $organisateur); ?>
                     <?php endforeach; ?>
                 </tbody>
             </table>
