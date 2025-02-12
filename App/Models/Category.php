@@ -2,7 +2,7 @@
 namespace App\Models;
 
 
-class category{
+class Category{
     private  $category_id;
     private  $nom;
     private  $description;

@@ -24,7 +24,6 @@ class CategoryRepository extends BaseRepository {
     $stmt->execute(); 
     $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $data = [];
-
     foreach ($categories as $category) {
         $data[] = new Category($category['nom'], $category['description'], $category['category_id']);
     }
