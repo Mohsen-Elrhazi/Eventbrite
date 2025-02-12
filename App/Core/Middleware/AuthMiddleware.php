@@ -5,17 +5,17 @@ use App\Core\Session;
 
 class AuthMiddleware{
 
-    public static function verifierRole(){
-        if(!Session::hasSession('role')){
-            header("location:/auth/auth");
-            exit;
-        }
-    }
+    // public static function verifierRole(){
+    //     if(!Session::hasSession('role')){
+    //         header("location:/auth/login");
+    //         exit;
+    //     }
+    // }
     
     // verifier si user connecté
     public static function checkAuth() {
         if (!Session::hasSession('user_id')) {
-            header("Location: /auth/auth");
+            header("Location: /auth/login");
             exit;
         }
     }
@@ -26,7 +26,7 @@ class AuthMiddleware{
         $userRole = Session::getSession('role');
 
         if ($userRole !== $role) {
-            header("Location: /403"); // Page interdite si rôle incorrect
+            header("Location:/error/error403"); // Page interdite si rôle incorrect
             exit;
         }
     }

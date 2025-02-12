@@ -13,4 +13,9 @@ class ErrorController {
         $this->response->setStatusCode(404);
         require_once dirname(__DIR__,1).'\Views\ErrorPages\error404.php';  
     }
+
+    public function error403() {
+        $this->response->setStatusCode(403);
+        require_once dirname(__DIR__,1).'\Views\ErrorPages\error403.php';  
+    }
 }

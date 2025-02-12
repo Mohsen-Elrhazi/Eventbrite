@@ -16,10 +16,20 @@ class AuthController
         $this->userRepository = new UserRepository();
     }
 
-
-    public function authView()
+    
+    public function registerView()
     {
-        require_once dirname(__DIR__, 1) . '\Views\Auth\auth.php';
+        require_once dirname(__DIR__, 1) . '\Views\Auth\register.php';
+    }
+    
+    public function loginView()
+    {
+        require_once dirname(__DIR__, 1) . '\Views\Auth\login.php';
+    }
+
+    public function forgotPasswordView()
+    {
+        require_once dirname(__DIR__, 1) . '\Views\Auth\forgotPassword.php';
     }
 
     public function register(): void
@@ -35,7 +45,7 @@ class AuthController
 
             if ($this->userRepository->findByEmail($email)) {
                 Session::setSession('error', 'Cet email est déjà utilisé.');
-                header("Location:/auth/auth");
+                header("Location:/auth/register");
                 exit;
                 
             } else {
@@ -45,13 +55,13 @@ class AuthController
 
                 $this->userRepository->save($user);
 
-                header("Location:/auth/auth");
                 Session::setSession('success', 'Vous êtes inscrit avec succès!');
+                header("Location:/auth/register");
                 exit;
             }
         } else {
-            Session::setSession('error', 'Veuillez remplir tous les champs correctement.');
-            // header("Location:/auth/auth");
+            Session::setSession('error', 'Veuillez remplir tous les champs.');
+            header("Location:/auth/register");
             exit;
         }
     }
@@ -72,53 +82,51 @@ class AuthController
                     Session::setSession('role', $user['role']);
                     Session::setSession('status', $user['status']);
 
-                //     switch (Session::getSession('role')) {
-                //         case 'Admin':
-                //             header("location:/admin/admin");
-                //             exit();
-                    
-                //         case 'Organisateur':
-                //             if (Session::getSession('status') === 'Active') {
-                //                 header("location:/organisateur/organisateur");
-                //                 exit();
-                //             } else {
-                //                 Session::setSession('error', 'Votre compte a été désactivé');
-                //                 header("Location:/auth/auth");
-                //                 exit();
-                //             }
-                    
-                //         case 'Participant':
-                //             if (Session::getSession('status') === 'Active') {
-                //                 header("location:/platform");
-                //                 exit();
-                //             } else {
-                //                 Session::setSession('error', 'Votre compte a été désactivé');
-                //                 header("Location:/auth/auth");
-                //                 exit();
-                //             }
-                    
-                //         default:
-                //         Session::setSession('error', 'Rôle ou statut invalide.');
-                //             header("Location:/auth/auth");
-                //             exit();
-                //     }
 
+                    switch (Session::getSession('role')) {
+                        case 'Admin':
+                            header("location:/admin/dashboard");
+                            exit();
+                    
+                        case 'Organisateur':
+                            if (Session::getSession('status') === 'Active') {
+                                header("location:/organisateur/dashboard");
+                                exit();
+                            } else {
+                                Session::setSession('error', 'Votre compte a été désactivé');
+                                header("Location:/auth/login");
+                                exit();
+                            }
+                    
+                        case 'Participant':
+                            if (Session::getSession('status') === 'Active') {
+                                header("location:/platform");
+                                exit();
+                            } else {
+                                Session::setSession('error', 'Votre compte a été désactivé');
+                                header("Location:/auth/login");
+                                exit();
+                            }
+                    
+                        default:
+                        Session::setSession('error', 'Rôle ou statut invalide.');
+                            header("Location:/auth/login");
+                            exit();
+                    }
+                    
                 } else {
                  Session::setSession('error', 'Mot de pass incorrect');
-                // echo Session::getSession('error');
-                //     header("Location:/login");
+                header("Location:/auth/login");
                 }
             } else {
                 Session::setSession('error', 'Aucun utilisateur trouvé avec cet email');
-        //    echo  Session::getSession('error');
-
-                // header("Location:/login");
+                header("Location:/auth/login");
             }
         }else{
             Session::setSession('error', 'Veuiller remplir tous les champs');
-        //    echo  Session::getSession('error');
-
-            header("Location:/auth/auth");
+            header("Location:/auth/login");
          }
     }
+
+    
 }

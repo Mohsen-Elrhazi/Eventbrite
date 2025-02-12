@@ -33,7 +33,7 @@ class UserRepository{
         return $stmt->rowCount() > 0;
     }
 
-    public function getUserByEmail($email):array {
+    public function getUserByEmail($email) {
         $stmt= $this->conn->prepare("SELECT * FROM users WHERE email = :email");
         $stmt->execute([
             ':email' => $email
