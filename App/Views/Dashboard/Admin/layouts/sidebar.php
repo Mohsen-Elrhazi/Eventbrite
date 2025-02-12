@@ -59,7 +59,7 @@
         </li>
 
         <li class="log_out">
-            <a href="admin/logout">
+            <a href="/admin/logout">
                 <i class="bx bx-log-out"></i>
                 <span class="links_name">Déconnexion</span>
             </a>

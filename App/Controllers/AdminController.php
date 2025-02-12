@@ -10,33 +10,57 @@ class AdminController {
       }
 
       
-    public function renderLayout($page){
+      public function renderLayout($page){
         require_once  dirname(__DIR__).'\Views\Dashboard\Admin\layouts\header.php';  
         require_once dirname(__DIR__).'\Views\Dashboard\Admin\layouts\sidebar.php';  
         require_once dirname(__DIR__).'\Views\Dashboard\Admin\layouts\section.php';  
         require_once dirname(__DIR__).'\Views\Dashboard\Admin\layouts\navbar.php';  
         require_once dirname(__DIR__).'\Views\Dashboard\Admin\layouts\homeContent.php'; 
          
-                 // Inclure la vue de la page spécifique (par exemple dashboard.php, events.php, etc.)
-        $pagePath = '\Views\Dashboard\Admin\pages\\' . $page . '.php';
-        if (file_exists($pagePath)) {
-            require_once dirname(__DIR__,1). $pagePath;
-        } else {
-            // Si la page n'existe pas, afficher une erreur 404
-            $errorController = new ErrorController();
-            $errorController->error404();
-            exit;
-        }
+        //todo include la page specifique selon le nom  de fichier qui est doit correspondant avec nom de page
+            require_once dirname(__DIR__,1).'\Views\Dashboard\Admin\pages\\' . $page . '.php';
 
-         
         require_once dirname(__DIR__).'\Views\Dashboard\Admin\layouts\endHomeContent.php';  
         require_once dirname(__DIR__).'\Views\Dashboard\Admin\layouts\endSection.php';  
         require_once dirname(__DIR__).'\Views\Dashboard\Admin\layouts\footer.php';  
     }
 
-    public function eventsView() {
-        $this->renderLayout('events'); // Charger la vue events.php
+    public function organisateursView() {
+        $this->renderLayout('organisateurs'); 
     }
+
+    public function participantsView() {
+        $this->renderLayout('participants'); 
+    }
+    
+    public function eventsView() {
+        $this->renderLayout('events'); 
+    }
+
+    public function categoriesView() {
+        $this->renderLayout('categories'); 
+    }
+    
+    public function editCategorieView() {
+        $this->renderLayout('editCategorie'); 
+    }
+    
+    public function tagsView() {
+        $this->renderLayout('tags'); 
+    }
+    
+    public function editTagView() {
+        $this->renderLayout('editTag'); 
+    }
+    
+    public function statistiquesView() {
+        $this->renderLayout('statistiques'); 
+    }
+    
+    public function logoutView() {
+        $this->renderLayout('logout'); 
+    }
+    
     
    
   

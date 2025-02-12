@@ -74,20 +74,37 @@ class Router{
          }
     }
 
+  
     private function applyRouteMiddlewares(string $controller, string $method) {
-        if ($controller === 'AdminController' && $method === 'dashboardView' ) {
-            AuthMiddleware::checkAuth();
-            AuthMiddleware::checkRole('Admin');
-        }
+        $routes = [
+            'AdminController' => [
+                'dashboardView' => 'Admin',
+                'organisateursView' => 'Admin',
+                'participantsView' => 'Admin',
+                'eventsView' => 'Admin',
+                'categoriesView' => 'Admin',
+                'editCategorieView' => 'Admin',
+                'tagsView' => 'Admin',
+                'editTagView' => 'Admin',
+                'statistiquesView' => 'Admin',
+                'logoutView' => 'Admin',
+            ],
+            'OrganisateurController' => [
+                'dashboardView' => 'Organisateur',
+                'eventsView' => 'Organisateur',
+                'participantsView' => 'Organisateur',
+                'statistiquesView' => 'Organisateur',
+                'logoutView' => 'Organisateur',
+            ]
+        ];
     
-        if ($controller === 'OrganisateurController' && $method === 'dashboardView') {
+        // Verifier si le contrôleur et la méthode sont définis
+        // $routes[$controller][$method] retourne le role Admin ou Organisateur
+        if (isset($routes[$controller]) && isset($routes[$controller][$method])) {
             AuthMiddleware::checkAuth();
-            AuthMiddleware::checkRole('Organisateur');
-        }
-
-        if ($controller === 'OrganisateurController' && $method === 'eventsView') {
-            AuthMiddleware::checkAuth();
-            AuthMiddleware::checkRole('Organisateur');
+            AuthMiddleware::checkRole($routes[$controller][$method]);
         }
     }
+
+    
 }
