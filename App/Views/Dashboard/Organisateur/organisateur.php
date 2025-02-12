@@ -5,7 +5,7 @@
         require_once dirname(__DIR__).'\Organisateur\layouts\navbar.php';  
         require_once dirname(__DIR__).'\Organisateur\layouts\homeContent.php'; 
          
-         echo "fichier de dashboard";
+         echo "Bienvenu dans votre dashboard Organisateur";
          
         require_once dirname(__DIR__).'\Organisateur\layouts\endHomeContent.php';  
         require_once dirname(__DIR__).'\Organisateur\layouts\endSection.php';  

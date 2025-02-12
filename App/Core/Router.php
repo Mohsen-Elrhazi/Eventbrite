@@ -84,5 +84,10 @@ class Router{
             AuthMiddleware::checkAuth();
             AuthMiddleware::checkRole('Organisateur');
         }
+
+        if ($controller === 'OrganisateurController' && $method === 'eventsView') {
+            AuthMiddleware::checkAuth();
+            AuthMiddleware::checkRole('Organisateur');
+        }
     }
 }
