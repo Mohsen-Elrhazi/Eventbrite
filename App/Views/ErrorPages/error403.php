@@ -11,10 +11,10 @@
 
 <body>
     <div class="container">
-        <div class="error-code">404</div>
-        <h1 class="error-title">Page non trouvée</h1>
+        <div class="error-code">403</div>
+        <h1 class="error-title">Accès interdit</h1>
         <p class="error-message">
-            Désolé, la page que vous recherchez n'existe pas.
+            Vous n'avez pas les permissions nécessaires pour accéder à cette page.
         </p>
         <a href="/" class="home-button">Retour à l'accueil</a>
     </div>
