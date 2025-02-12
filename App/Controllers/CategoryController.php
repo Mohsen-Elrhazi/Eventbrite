@@ -31,9 +31,10 @@ class CategoryController
                 $this->categoryRepository->save( $category);
 
                 Session::setSession('success', 'Vous êtes ajoute categore avec succès!');
-                header("Location:/admin/categories");
+                echo "addCategory";
+                // header("Location:/admin/categories");
               
-                exit;
+                // exit;
                
             
         } else {

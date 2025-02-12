@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
 <?php
-        use App\Controllers\CategoryController;
+        use App\Controllers\TagsController;
         use App\Core\Session; 
         if(Session::hasSession('error')){
             echo "<div class='alert alert-danger text-center'>". Session::getSession('error') ."</div>";
@@ -10,8 +10,6 @@
             echo "<div class='alert alert-success text-center'>". Session::getSession('success') ."</div>";
             Session::removeSession('success');
         }
-
-
 ?>
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Ajoute Tag
@@ -27,7 +25,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="/category/addCategory" method="POST">
+        <form action="/tags/addtag" method="POST">
                 <div class="mb-3">
                     <label for="title" class="form-label">title</label>
                     <input type="text" name="nom" class="form-control" id="title" aria-describedby="emailHelp">
@@ -55,28 +53,14 @@
             </tr>
         </thead>
         <tbody>
-            <?php if (!empty($categories)): ?>
-                <?php foreach ($categories as $category): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($category->getTagId()); ?></td>
-                        <td><?= htmlspecialchars($category->getNom()); ?></td>
-                        <td>
-                            <a href="/category/edit/<?= $category->getTagId(); ?>" class="btn btn-warning btn-sm me-2">
-                                <i class="fa fa-edit"></i> Modifier
-                            </a>
-                            <form action="/category/delete/<?= $category->geTagId(); ?>" method="POST" style="display:inline;">
-                                <button type="submit" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-trash"></i> Supprimer
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
+            <?php
+            $objetController= new TagsController();
+           $tags= $objetController->listeTags();
+           ?>
+                <?php foreach ($tags as $tag): ?>
+                   <?php echo $objetController->renderRow($tag); ?>
                 <?php endforeach; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="4" class="text-center">Aucune catégorie trouvée.</td>
-                </tr>
-            <?php endif; ?>
+           
         </tbody>
     </table>
 </div>
