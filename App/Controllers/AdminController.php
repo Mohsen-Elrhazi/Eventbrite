@@ -24,7 +24,7 @@ class AdminController
         require_once dirname(__DIR__) . '\Views\Dashboard\Admin\layouts\homeContent.php';
 
         //todo include la page specifique selon le nom  de fichier qui est doit correspondant avec nom de page
-        require_once dirname(__DIR__, 1) . '\Views\Dashboard\Admin\pages\\' . $page . '.php';
+         require_once dirname(__DIR__,1).'\Views\Dashboard\Admin\pages\\' . $page . '.php';
 
         require_once dirname(__DIR__) . '\Views\Dashboard\Admin\layouts\endHomeContent.php';
         require_once dirname(__DIR__) . '\Views\Dashboard\Admin\layouts\endSection.php';
