@@ -78,7 +78,6 @@ class Router{
     private function applyRouteMiddlewares(string $controller, string $method) {
         $routes = [
             'AdminController' => [
-                'dashboardView' => 'Admin',
                 'organisateursView' => 'Admin',
                 'participantsView' => 'Admin',
                 'eventsView' => 'Admin',
@@ -90,7 +89,6 @@ class Router{
                 'logoutView' => 'Admin',
             ],
             'OrganisateurController' => [
-                'dashboardView' => 'Organisateur',
                 'eventsView' => 'Organisateur',
                 'participantsView' => 'Organisateur',
                 'statistiquesView' => 'Organisateur',

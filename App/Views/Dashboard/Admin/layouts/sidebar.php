@@ -6,6 +6,12 @@
     </div>
     <ul class="nav-links">
         <li>
+            <a href="/admin/statistiques">
+                <i class="fa-solid fa-chart-column"></i>
+                <span class="links_name">Statistiques</span>
+            </a>
+        </li>
+        <li>
             <a href="/admin/organisateurs">
                 <i class="fas fa-user-tie"></i>
                 <span class="links_name">Organisateurs</span>
@@ -31,32 +37,27 @@
             </a>
         </li>
 
-        <li>
+        <!-- <li>
             <a href="/admin/editCategorie">
                 <i class="fa-regular fa-pen-to-square"></i>
                 <span class="links_name">Edit Catégorie</span>
             </a>
-        </li>
+        </li> -->
         <li>
             <a href="/admin/tags">
                 <i class="fa-solid fa-tag"></i>
                 <span class="links_name">Tags</span>
             </a>
         </li>
-        <li>
+        <!-- <li>
             <a href="/admin/editTag">
                 <i class="fa-regular fa-pen-to-square"></i>
                 <span class="links_name">Edit Tag</span>
             </a>
-        </li>
+        </li> -->
 
 
-        <li>
-            <a href="/admin/statistiques">
-                <i class="fa-solid fa-chart-column"></i>
-                <span class="links_name">Statistiques</span>
-            </a>
-        </li>
+
 
         <li class="log_out">
             <a href="/admin/logout">

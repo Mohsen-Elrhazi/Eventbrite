@@ -5,11 +5,7 @@ use App\Core\Session;
 
 class AdminController {
 
-    public function dashboardView() {
-        require_once dirname(__DIR__,1).'\Views\Dashboard\Admin\admin.php';  
-      }
-
-      
+   
       public function renderLayout($page){
         require_once  dirname(__DIR__).'\Views\Dashboard\Admin\layouts\header.php';  
         require_once dirname(__DIR__).'\Views\Dashboard\Admin\layouts\sidebar.php';  
@@ -23,6 +19,10 @@ class AdminController {
         require_once dirname(__DIR__).'\Views\Dashboard\Admin\layouts\endHomeContent.php';  
         require_once dirname(__DIR__).'\Views\Dashboard\Admin\layouts\endSection.php';  
         require_once dirname(__DIR__).'\Views\Dashboard\Admin\layouts\footer.php';  
+    }
+
+    public function statistiquesView() {
+        $this->renderLayout('statistiques'); 
     }
 
     public function organisateursView() {
@@ -53,9 +53,7 @@ class AdminController {
         $this->renderLayout('editTag'); 
     }
     
-    public function statistiquesView() {
-        $this->renderLayout('statistiques'); 
-    }
+  
     
     public function logoutView() {
         $this->renderLayout('logout'); 

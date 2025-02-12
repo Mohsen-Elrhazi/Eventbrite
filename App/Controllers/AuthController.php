@@ -85,12 +85,12 @@ class AuthController
 
                     switch (Session::getSession('role')) {
                         case 'Admin':
-                            header("location:/admin/dashboard");
+                            header("location:/admin/statistiques");
                             exit();
                     
                         case 'Organisateur':
                             if (Session::getSession('status') === 'Active') {
-                                header("location:/organisateur/dashboard");
+                                header("location:/organisateur/statistiques");
                                 exit();
                             } else {
                                 Session::setSession('error', 'Votre compte a été désactivé');

@@ -5,10 +5,6 @@ use App\Core\Session;
 
 class OrganisateurController {
     
-    public function dashboardView() {
-        require_once dirname(__DIR__,1).'\Views\Dashboard\Organisateur\organisateur.php';  
-      }
-  
       public function renderLayout($page){
         require_once  dirname(__DIR__).'\Views\Dashboard\Organisateur\layouts\header.php';  
         require_once dirname(__DIR__).'\Views\Dashboard\Organisateur\layouts\sidebar.php';  
@@ -24,6 +20,10 @@ class OrganisateurController {
         require_once dirname(__DIR__).'\Views\Dashboard\Organisateur\layouts\footer.php';  
     }
 
+    public function statistiquesView() {
+      $this->renderLayout('statistiques'); 
+    }
+    
     public function eventsView() {
         $this->renderLayout('events'); 
     }
@@ -36,9 +36,7 @@ class OrganisateurController {
         $this->renderLayout('participants'); 
     }
 
-    public function statistiquesView() {
-      $this->renderLayout('statistiques'); 
-    }
+   
     
     public function logoutView() {
       $this->renderLayout('logout'); 

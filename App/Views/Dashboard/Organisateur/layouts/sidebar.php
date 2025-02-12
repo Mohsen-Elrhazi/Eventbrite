@@ -7,18 +7,25 @@
     <ul class="nav-links">
 
         <li>
+            <a href="/organisateur/statistiques">
+                <i class="fa-solid fa-chart-column"></i>
+                <span class="links_name">Statistiques</span>
+            </a>
+        </li>
+
+        <li>
             <a href="/organisateur/events">
                 <i class="fas fa-calendar-alt"></i>
                 <span class="links_name">Event</span>
             </a>
         </li>
 
-        <li>
+        <!-- <li>
             <a href="/organisateur/editEvent">
                 <i class="fa-regular fa-pen-to-square"></i>
                 <span class="links_name">Edit Event</span>
             </a>
-        </li>
+        </li> -->
 
         <li>
             <a href="/organisateur/participants">
@@ -26,12 +33,7 @@
                 <span class="links_name">Participants</span>
             </a>
         </li>
-        <li>
-            <a href="/organisateur/statistiques">
-                <i class="fa-solid fa-chart-column"></i>
-                <span class="links_name">Statistiques</span>
-            </a>
-        </li>
+
 
         <li class="log_out">
             <a href="/organisateur/logout">
