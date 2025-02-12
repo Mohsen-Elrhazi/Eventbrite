@@ -25,7 +25,7 @@ class Router{
            }
         
         // Extraire le controller premier segment
-               $controller = $uri[0]; 
+               $controller = $uri[0] ?? '';
             if (empty($controller)) {
                 $controller = 'platform'; 
             }
@@ -40,7 +40,7 @@ class Router{
          $objectController= new $this->controller;
 
          //Extraire la methode 
-         $method= $uri[1];
+         $method= $uri[1] ?? '';
          if (empty($method)) {
             $method = 'platform'; 
         }

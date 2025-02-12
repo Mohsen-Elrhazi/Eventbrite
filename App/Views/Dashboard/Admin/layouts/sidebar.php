@@ -6,69 +6,60 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="/addProduct">
-                <i class="fa-solid fa-plus"></i>
-                <span class="links_name">Add Product</span>
+            <a href="/admin/organisateurs">
+                <i class="fas fa-user-tie"></i>
+                <span class="links_name">Organisateurs</span>
             </a>
         </li>
         <li>
-            <a href="index.php?page=edit_product">
-                <i class="fa-regular fa-pen-to-square"></i>
-                <span class="links_name">Edit Product</span>
+            <a href="/admin/participants">
+                <i class="fa-solid fa-users"></i>
+                <span class="links_name">Participants</span>
             </a>
         </li>
         <li>
-            <a href="index.php?page=product">
-                <i class="bx bx-box"></i>
-                <!-- <i class="fa-brands fa-product-hunt"></i> -->
-                <span class="links_name">Product</span>
-            </a>
-        </li>
-        <li>
-            <a href="index.php?page=client">
-                <i class="fa-solid fa-plus"></i>
-                <span class="links_name">Add Categorie</span>
-            </a>
-        </li>
-        <li>
-            <a href="index.php?page=commande">
-                <i class="fa-regular fa-pen-to-square"></i>
-                <span class="links_name">Edit categorie</span>
+            <a href="/admin/events">
+                <i class="fas fa-calendar-alt"></i>
+                <span class="links_name">Events</span>
             </a>
         </li>
 
         <li>
-            <a href="index.php?page=analyses">
+            <a href="/admin/categories">
                 <i class="fa-solid fa-list"></i>
-                <span class="links_name">Categories</span>
+                <span class="links_name">Catégories</span>
             </a>
         </li>
-        <!-- <li>
-            <a href="index.php?page=stock">
-                <i class="bx bx-coin-stack"></i>
-                <span class="links_name">Stock</span>
+
+        <li>
+            <a href="/admin/editCategorie">
+                <i class="fa-regular fa-pen-to-square"></i>
+                <span class="links_name">Edit Catégorie</span>
             </a>
         </li>
         <li>
-            <a href="index.php?page=utilisateur">
-                <i class="bx bx-user"></i>
-                <span class="links_name">Utilisateur</span>
+            <a href="/admin/tags">
+                <i class="fa-solid fa-tag"></i>
+                <span class="links_name">Tags</span>
             </a>
         </li>
         <li>
-            <a href="index.php?page=messages">
-                <i class="bx bx-message"></i>
-                <span class="links_name">Messages</span>
+            <a href="/admin/editTag">
+                <i class="fa-regular fa-pen-to-square"></i>
+                <span class="links_name">Edit Tag</span>
             </a>
         </li>
+
+
         <li>
-            <a href="index.php?page=configuration">
-                <i class="bx bx-cog"></i>
-                <span class="links_name">Configuration</span>
+            <a href="/admin/statistiques">
+                <i class="fa-solid fa-chart-column"></i>
+                <span class="links_name">Statistiques</span>
             </a>
-        </li> -->
+        </li>
+
         <li class="log_out">
-            <a href="index.php?page=logout">
+            <a href="admin/logout">
                 <i class="bx bx-log-out"></i>
                 <span class="links_name">Déconnexion</span>
             </a>
