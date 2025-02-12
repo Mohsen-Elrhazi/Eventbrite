@@ -86,6 +86,15 @@ class AdminController
 
     public function rederRow($organisateur)
     {
+        $status= $organisateur->getStatus();
+        
+        $btn= ' ';
+        if($status==="Active"){
+            $btn= "<button class='btn btn-success'>Switch</button>";
+        }else{
+            $btn= "<button class='btn btn-danger'>Switch</button>";
+
+        }
 
         return "<tr>
         <td> " . $organisateur->getPrenom() . "</td>
@@ -93,20 +102,19 @@ class AdminController
         <td> " . $organisateur->getEmail() . "</td>
         <td> " . $organisateur->getStatus() . "</td>
         <td>
-        <a href='admin/updateStatusUser/". $organisateur->getID() ."'>switch</a>
+        <form method='post' action='/admin/updateStatusUser/". $organisateur->getID()."'>
+        $btn
+        </form>
         </td>
     </tr>";
     }
 
-    public function updateStatusUser($id)
+    public function updateStatusUser(int $id)
     {
-
-        // echo "methode update";
-        if (isset($_GET["id"])) {
-            $id = $_GET["id"];
-
-            $this->userRepository->updateStatus("users","users_id",$id);
-        }
+        $this->userRepository->updateStatus("users","user_id",$id);
+        Session::setSession('success', 'status a été changé avec success');
+        header("location:/admin/organisateurs/");
+        exit();
     }
 
     //-------------amine : displayOrganisateur()------------
