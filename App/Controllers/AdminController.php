@@ -20,7 +20,7 @@ class AdminController {
         require_once dirname(__DIR__).'\Views\Dashboard\Admin\layouts\endSection.php';  
         require_once dirname(__DIR__).'\Views\Dashboard\Admin\layouts\footer.php';  
     }
-
+    
     public function statistiquesView() {
         $this->renderLayout('statistiques'); 
     }
