@@ -21,16 +21,6 @@ use App\Core\Session;
 <body>
 
     <div class="container">
-        <?php 
-        if(Session::hasSession('error')){
-            echo "<div class='alert alert-danger text-center'>". Session::getSession('error') ."</div>";
-            Session::removeSession('error');
-        }
-        if(Session::hasSession('success')){
-            echo "<div class='alert alert-success text-center'>". Session::getSession('success') ."</div>";
-            Session::removeSession('success');
-        }
-         ?>
 
         <div class="form-wrapper">
 

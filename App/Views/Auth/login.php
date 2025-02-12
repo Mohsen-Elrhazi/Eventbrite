@@ -1,6 +1,3 @@
-<?php 
-use App\Core\Session;
-?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -20,16 +17,7 @@ use App\Core\Session;
 
 <body>
     <div class="container">
-        <?php 
-        if(Session::hasSession('error')){
-            echo "<div class='alert alert-danger text-center'>". Session::getSession('error') ."</div>";
-            Session::removeSession('error');
-        }
-        // if(Session::hasSession('role')){
-        //     echo "<div class='alert alert-danger text-center'>". Session::getSession('role') ."</div>";
-        //     Session::removeSession('role');
-        // }
-         ?>
+
         <div class="form-wrapper">
 
             <!-- Formulaire de connexion -->
