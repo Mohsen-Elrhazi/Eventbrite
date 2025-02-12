@@ -30,7 +30,7 @@ class TagsRepository extends BaseRepository {
     return $data;
 }
     public function delete($id) {
-        $stmt = $this->conn->prepare("DELETE FROM tag WHERE tag_id = :id");
+        $stmt = $this->conn->prepare("DELETE FROM tags WHERE tag_id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute(); 
     }
