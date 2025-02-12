@@ -21,3 +21,7 @@
 </head>
 
 <body>
+    <!-- Spinner de chargement -->
+    <div id="loader" class="loader">
+        <div class="spinner"></div>
+    </div>

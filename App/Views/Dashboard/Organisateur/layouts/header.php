@@ -19,7 +19,11 @@
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><?php echo $titre ?></title>
+    <title>Organisateur</title>
 </head>
 
 <body>
+    <!-- Spinner de chargement -->
+    <div id="loader" class="loader">
+        <div class="spinner"></div>
+    </div>
