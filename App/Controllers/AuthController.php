@@ -94,7 +94,9 @@ class AuthController
                                 exit();
                             } else {
                                 Session::setSession('error', 'Votre compte a été désactivé');
+                                Session::destroySession();
                                 header("Location:/auth/login");
+                                
                                 exit();
                             }
                     

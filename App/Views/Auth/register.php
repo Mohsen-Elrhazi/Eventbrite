@@ -68,7 +68,9 @@ use App\Core\Session;
                 </div>
                 <button type="submit" class="btn btn-primary">S'inscrire</button>
                 <div class="forgot-password-link">
-                    <p>Vous avez déja inscrit ?<a href="auth/login" id="forgot-password-link"> Se connecter ?</a></p>
+                    <!-- <a href="auth/login" id="forgot-password-link"> Se connecter ?</a> -->
+                    <p clss="">Vous avez déja inscrit ?<a href="auth/login" id="forgot-password-link"> Se connecter
+                            ?</a></p>
                 </div>
 
             </form>
