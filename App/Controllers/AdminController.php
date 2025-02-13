@@ -84,30 +84,6 @@ class AdminController
         return $this->userRepository->display();
     }
 
-    public function rederRow($organisateur)
-    {
-        $status= $organisateur->getStatus();
-        
-        $btn= ' ';
-        if($status==="Active"){
-            $btn= "<button class='btn btn-success'>Switch</button>";
-        }else{
-            $btn= "<button class='btn btn-danger'>Switch</button>";
-
-        }
-
-        return "<tr>
-        <td> " . $organisateur->getPrenom() . "</td>
-        <td> " . $organisateur->getNom() . "</td>
-        <td> " . $organisateur->getEmail() . "</td>
-        <td> " . $organisateur->getStatus() . "</td>
-        <td>
-        <form method='post' action='/admin/updateStatusUser/". $organisateur->getID()."'>
-        $btn
-        </form>
-        </td>
-    </tr>";
-    }
 
     public function updateStatusUser(int $id)
     {
