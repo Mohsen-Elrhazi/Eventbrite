@@ -1,4 +1,5 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="container">
     <h1>Liste des événements</h1>
@@ -85,48 +86,48 @@
                     <input type="hidden" id="event_id" name="event_id">
 
                     <div class="mb-3">
-                        <label for="edit_titre">Titre:</label>
-                        <input type="text" id="edit_titre" name="titre" class="form-control" required>
+                        <label for="titre">Titre:</label>
+                        <input type="text" id="titre" name="titre" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="edit_description">Description:</label>
-                        <textarea id="edit_description" name="description" class="form-control" required></textarea>
+                        <label for="description">Description:</label>
+                        <textarea id="description" name="description" class="form-control" required></textarea>
                     </div>
 
                     <div class="mb-3">
-                        <label for="edit_image">Image:</label>
-                        <input type="text" id="edit_image" name="image" class="form-control" required>
+                        <label for="image">Image:</label>
+                        <input type="text" id="image" name="image" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="edit_event_date">Date:</label>
-                        <input type="date" id="edit_event_date" name="event_date" class="form-control" required>
+                        <label for="event_date">Date:</label>
+                        <input type="date" id="event_date" name="event_date" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="edit_heure_debut">Heure de début:</label>
-                        <input type="time" id="edit_heure_debut" name="heure_debut" class="form-control" required>
+                        <label for="heure_debut">Heure de début:</label>
+                        <input type="time" id="heure_debut" name="heure_debut" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="edit_heure_fin">Heure de fin:</label>
-                        <input type="time" id="edit_heure_fin" name="heure_fin" class="form-control" required>
+                        <label for="heure_fin">Heure de fin:</label>
+                        <input type="time" id="heure_fin" name="heure_fin" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="edit_prix">Prix:</label>
-                        <input type="number" id="edit_prix" name="prix" class="form-control" required>
+                        <label for="prix">Prix:</label>
+                        <input type="number" id="prix" name="prix" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="edit_content_url">URL du contenu:</label>
-                        <input type="url" id="edit_content_url" name="content_url" class="form-control" required>
+                        <label for="content_url">URL du contenu:</label>
+                        <input type="url" id="content_url" name="content_url" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="edit_category_id">Catégorie:</label>
-                        <input type="number" id="edit_category_id" name="category_id" class="form-control" required>
+                        <label for="category_id">Catégorie:</label>
+                        <input type="number" id="category_id" name="category_id" class="form-control" required>
                     </div>
 
                     <button type="submit" class="btn btn-success">Modifier</button>
@@ -139,7 +140,6 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-
     document.addEventListener('DOMContentLoaded', () => {
         loadData();
     });
@@ -149,22 +149,44 @@
             success: function (response) {
                 let events = JSON.parse(response);
                 console.log(events);
-                let eventsHTML = "<table class='table table-bordered'><thead><tr><th>Titre</th><th>Description</th><th>Image</th><th>Data</th><th>Debut</th><th>Fin</th><th>Content URL</th><th>Category ID</th><th>Actions</th></tr></thead><tbody>";
-                events.forEach(event => {
-                    eventsHTML += `<tr>
-                            <td>${event.titre}</td>
-                            <td>${event.description}</td>
-                            <td>${event.image}</td>
-                            <td>${event.event_date}</td>
-                            <td>${event.heure_debut}</td>
-                            <td>${event.heure_fin}</td>
-                            <td>${event.content_url}</td>
-                            <td>${event.category_id}</td>
-                            <td>
-                                <button onclick="editEvent(${event.event_id})" class="btn btn-warning">Éditer</button>
-                                <button onclick="deleteEvent(${event.event_id})" class="btn btn-danger">Supprimer</button>
-                            </td>
-                        </tr>`;
+                let eventsHTML = `
+    <div class="table-container">
+        <table class='table table-bordered table-striped table-hover'>
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Date</th>
+                    <th>Début</th>
+                    <th>Fin</th>
+                    <th>Content URL</th>
+                    <th>Category ID</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>`;
+
+events.forEach(event => {
+    eventsHTML += `
+        <tr>
+            <td>${event.titre}</td>
+            <td>${event.description}</td>
+            <td><img src="${event.image}" alt="Image de l'événement"></td>
+            <td>${event.event_date}</td>
+            <td>${event.heure_debut}</td>
+            <td>${event.heure_fin}</td>
+            <td>${event.content_url}</td>
+            <td>${event.category_id}</td>
+            <td>
+                <button onclick="editEvent(${event.event_id})" class="btn btn-warning btn-sm">
+                    <i class="fas fa-edit"></i> Éditer
+                </button>
+                <button onclick="deleteEvent(${event.event_id})" class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash-alt"></i> Supprimer
+                </button>
+            </td>
+        </tr>`;
                 });
                 eventsHTML += "</tbody></table>";
                 $('#eventsTable').html(eventsHTML);
@@ -181,7 +203,7 @@
             data: $(this).serialize(),
             success: function (response) {
                 // alert("Événement ajouté !");
-                $('#addEventModal').modal('hide');
+                // $('#addEventModal').modal('hide');
                 loadData();
             }
         });
@@ -213,18 +235,42 @@
 
     // Appel AJAX pour supprimer un événement
     function deleteEvent(id) {
-        if (confirm("Voulez-vous vraiment supprimer cet événement ?")) {
+    Swal.fire({
+        title: "Êtes-vous sûr ?",
+        text: "Cette action est irréversible !",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Oui, supprimer",
+        cancelButtonText: "Annuler"
+    }).then((result) => {
+        if (result.isConfirmed) {
             $.ajax({
                 url: '/event/destroy/' + id,
                 type: 'POST',
-                // data: { action: 'delete', id: id },
                 success: function () {
-                    // alert("Événement supprimé !");
-                    loadData();
+                    Swal.fire({
+                        title: "Supprimé !",
+                        text: "L'événement a été supprimé avec succès.",
+                        icon: "success",
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                    loadData(); // Recharge la liste des événements
+                },
+                error: function () {
+                    Swal.fire({
+                        title: "Erreur",
+                        text: "Une erreur s'est produite, veuillez réessayer.",
+                        icon: "error"
+                    });
                 }
             });
         }
-    }
+    });
+}
+
 </script>
 
 <!-- <script src="public/assets/js/dashboard/organisateur/script.js"></script> -->
