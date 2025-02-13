@@ -47,10 +47,10 @@ class UserRepository
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function display()
+    public function display($role)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM users where role='Organisateur' ORDER BY user_id ASC");
-        $stmt->execute();
+        $stmt = $this->conn->prepare("SELECT * FROM users where role=:role ORDER BY user_id ASC");
+        $stmt->execute([':role' => $role]);
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $data = [];
 
@@ -59,9 +59,19 @@ class UserRepository
         }
         return $data;
     }
-    public function updateStatus($table,$columnID,$id){
-        $stmt = $this->conn->prepare("UPDATE $table SET status = CASE WHEN status = 'Active' THEN 'Inactive' ELSE 'Active' END WHERE $columnID = :id");
+
+    public function updateStatus($id)
+    {
+        $stmt = $this->conn->prepare("UPDATE users SET status = CASE WHEN status = 'Active' THEN 'Inactive' ELSE 'Active' END WHERE user_id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
+    }
+    public function findById($id)
+    {
+        $stmt = $this->conn->prepare("SELECT role FROM users WHERE user_id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+          $stmt->execute();
+          return $role=$stmt->fetchColumn();
+
     }
 }
