@@ -1,8 +1,9 @@
 <?php
+
 use App\Controllers\AdminController;
+use App\Services\UserService;
 
 $adminController = new AdminController();
-$organisateurs = $adminController->displayOrganisateur();
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +18,7 @@ $organisateurs = $adminController->displayOrganisateur();
 </head>
 
 <body class="bg-light">
-    <?php  require_once dirname(__DIR__) . '../../../Includes/messages.php';  ?>
+    <?php require_once dirname(__DIR__) . '../../../Includes/messages.php';  ?>
 
 
     <div class="container mt-5">
@@ -34,9 +35,8 @@ $organisateurs = $adminController->displayOrganisateur();
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($organisateurs as $organisateur) : ?>
-                    <?php echo $adminController->rederRow(organisateur: $organisateur); ?>
-                    <?php endforeach; ?>
+                    <?php $adminController->displayOrganisateur();
+                    ?>
                 </tbody>
             </table>
         </div>
