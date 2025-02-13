@@ -31,7 +31,7 @@ class EventRepository extends BaseRepository
         return $eventID;
     }
 
-       // Méthode pour sauvegarder les tags
+       // Méthode pour sauvegarder les eventID et tagID dans table event_tag
        public function saveTags(int $eventID, array $tagsID) {
         try{
             $stmt = $this->conn->prepare("INSERT INTO event_tag (event_id, tag_id) VALUES (:event_id, :tag_id)");
@@ -45,17 +45,6 @@ class EventRepository extends BaseRepository
         die("erreur d'insertion des tags: ".$e->getMessage());
     }
 }
-
-// public function saveTags(int $eventID) {
-//     try{
-//         $stmt = $this->conn->prepare("INSERT INTO event_tag (event_id) VALUES (:event_id)");
-//             $stmt->execute([
-//                 ':event_id' => $eventID,
-//             ]);
-//     }catch(PDOException $e){
-//     die("erreur d'insertion des tags: ".$e->getMessage());
-// }
-// }
 
     public function edit($event)
     {
