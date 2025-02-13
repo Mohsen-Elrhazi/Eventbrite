@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Repositories\CategoryRepository;
 use App\Services\Validation;
 use App\Core\Session;
+use App\Services\CategoryService;
 
 class CategoryController
 {
@@ -46,31 +47,12 @@ class CategoryController
     public function listeCategories()
         {
             $categories = $this->categoryRepository->display();
-            return $categories;
+             foreach ($categories as $category){
+                echo CategoryService::renderRow($category);
+             } 
         }
 
-        public function renderRow($category){
-            return "<tr>
-                <td>". $category->getCategoryId()."</td>
-                <td>". $category->getNom()."</td>
-                <td>". $category->getDescription()."</td>
-                <td>
-                    <button  type='button' class='btn btn-warning btn-sm me-2' 
-                    data-bs-toggle='modal' data-bs-target='#update-categorie' 
-                    data-category-id='".$category->getCategoryId()."' 
-                    data-category-name='".$category->getNom()."'
-                    data-category-description='".$category->getDescription()."'>
-                        <i class='fa fa-edit'></i> Modifier
-                    </button>
-                    <form action='/category/deleteCategory/".$category->getCategoryId()."' method='POST' class='d-inline'>
-                        <button type='submit' class='btn btn-danger btn-sm me-2'>
-                            <i class='fa fa-trash'></i> Supprimer
-                        </button>
-                    </form>
-                </td>
-            </tr>";
-        }
-        
+
     public function deleteCategory($id){
         $this->categoryRepository->delete($id);
         Session::setSession('success', 'Vous êtes asupprime categore avec succès!');

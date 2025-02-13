@@ -4,8 +4,10 @@ namespace App\Controllers;
 
 use App\Models\Tags;
 use App\Repositories\TagsRepository;
+use App\Services\TagService;
 use App\Services\Validation;
 use App\Core\Session;
+
 
 class TagsController
 {
@@ -44,29 +46,15 @@ class TagsController
     public function listeTags()
         {
             $tags = $this->tagsRepository->display();
-            return $tags;
+           foreach ($tags as $tag){
+            echo TagService::renderRow($tag); 
+           }
+               
+             
         }
+ 
 
-        public function renderRow($tag){
-            return "<tr>
-            <td>". $tag->getTagId()."</td>
-            <td>". $tag->getNom()."</td>
-           <td>
-                    <button  type='button' class='btn btn-warning btn-sm me-2' 
-                    data-bs-toggle='modal' data-bs-target='#update-tag' 
-                    data-tag-id='".$tag->getTagId()."' 
-                    data-tag-name='".$tag->getNom()."'>
-                    
-                        <i class='fa fa-edit'></i> Modifier
-                    </button>
-                    <form action='/tags/deleteTag/".$tag->getTagId()."' method='POST' class='d-inline'>
-                        <button type='submit' class='btn btn-danger btn-sm me-2'>
-                            <i class='fa fa-trash'></i> Supprimer
-                        </button>
-                    </form>
-                </td>
-        </tr>";
-        }
+
     public function deleteTag($id){
         $this->tagsRepository->delete($id);
         Session::setSession('success', 'Vous êtes delete tag avec succès!');

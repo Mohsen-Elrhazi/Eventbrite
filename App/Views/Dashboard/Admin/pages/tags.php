@@ -82,9 +82,7 @@
             $objetController= new TagsController();
            $tags= $objetController->listeTags();
            ?>
-                <?php foreach ($tags as $tag): ?>
-                   <?php echo $objetController->renderRow($tag); ?>
-                <?php endforeach; ?>
+               
            
         </tbody>
     </table>

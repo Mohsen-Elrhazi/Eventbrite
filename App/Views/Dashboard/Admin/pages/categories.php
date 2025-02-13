@@ -89,12 +89,9 @@
         <tbody>
             <?php
             $objetController= new CategoryController();
-           $categories= $objetController->listeCategories();
+            $objetController->listeCategories();
            ?>
-                <?php foreach ($categories as $category): ?>
-                   <?php echo $objetController->renderRow($category); ?>
-                <?php endforeach; ?>
-           
+  
         </tbody>
     </table>
 </div>
