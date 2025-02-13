@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\Session;
+use App\Services\UserService;
 use App\Repositories\UserRepository;
 
 class AdminController
@@ -24,7 +25,7 @@ class AdminController
         require_once dirname(__DIR__) . '\Views\Dashboard\Admin\layouts\homeContent.php';
 
         //todo include la page specifique selon le nom  de fichier qui est doit correspondant avec nom de page
-         require_once dirname(__DIR__,1).'\Views\Dashboard\Admin\pages\\' . $page . '.php';
+        require_once dirname(__DIR__, 1) . '\Views\Dashboard\Admin\pages\\' . $page . '.php';
 
         require_once dirname(__DIR__) . '\Views\Dashboard\Admin\layouts\endHomeContent.php';
         require_once dirname(__DIR__) . '\Views\Dashboard\Admin\layouts\endSection.php';
@@ -72,7 +73,6 @@ class AdminController
     }
 
 
-
     public function logoutView()
     {
         $this->renderLayout('logout');
@@ -81,17 +81,38 @@ class AdminController
     //-------------amine : displayOrganisateur()------------
     public function displayOrganisateur()
     {
-        return $this->userRepository->display();
-    }
+        $organisateurs = $this->userRepository->display("Organisateur");
 
+        foreach ($organisateurs as $organisateur) {
+            echo UserService::renderRowUser(user: $organisateur);
+        }
+    }
+    public function displayParticipant()
+    {
+        $participants = $this->userRepository->display("Participant");
+        foreach ($participants as $participant) {
+            echo UserService::renderRowUser(user: $participant);
+        }
+    }
 
     public function updateStatusUser(int $id)
     {
-        $this->userRepository->updateStatus("users","user_id",$id);
+        $this->userRepository->updateStatus($id);
         Session::setSession('success', 'status a été changé avec success');
-        header("location:/admin/organisateurs/");
+        $role = $this->userRepository->findRoleById($id);
+
+        if ($role === "Organisateur") {
+
+            header("location:/admin/organisateurs/");
+        } elseif ($role === "Participant") {
+            header("location:/admin/participants/");
+        } else {
+            echo "erro";
+        }
+
         exit();
     }
+
 
     //-------------amine : displayOrganisateur()------------
 

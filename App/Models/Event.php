@@ -1,65 +1,108 @@
 <?php
 namespace App\Models;
 
-class Event{
-    private $event_id;
+class Event
+{
+    private $id;
     private $titre;
-    private $image;
     private $description;
     private $event_date;
-    private $cotent_url;
+    private $heure_debut;
+    private $heure_fin;
+    private $prix;
+    private $image;
+    private $content_url;
     private $category_id;
 
-    public function __construct($event_id ,$titre, $description ,$event_date ,$image ,$cotent_url ,$category_id){
-        $this->event_id = $event_id;
+    public function __construct($titre, $description, $event_date, $heure_debut, $heure_fin, $prix, $image, $content_url, $category_id, $id = null)
+    {
+        $this->id = $id;
         $this->titre = $titre;
         $this->description = $description;
         $this->event_date = $event_date;
+        $this->heure_debut = $heure_debut;
+        $this->heure_fin = $heure_fin;
+        $this->prix = $prix;
         $this->image = $image;
-        $this->cotent_url = $cotent_url;
+        $this->content_url = $content_url;
         $this->category_id = $category_id;
-    } 
+    }
 
-    public function getEventID(){
-        return $this->event_id;
+    // Getters et setters
+    public function getId()
+    {
+        return $this->id;
     }
-    public function getTitre(){
+    public function getTitre()
+    {
         return $this->titre;
     }
-    public function getDescription(){
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+    }
+    public function getDescription()
+    {
         return $this->description;
     }
-    public function getEventDATE(){
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+    public function getEventDate()
+    {
         return $this->event_date;
     }
-    public function getImage(){
+    public function setEventDate($event_date)
+    {
+        $this->event_date = $event_date;
+    }
+    public function getHeureDebut()
+    {
+        return $this->heure_debut;
+    }
+    public function setHeureDebut($heure_debut)
+    {
+        $this->heure_debut = $heure_debut;
+    }
+    public function getHeureFin()
+    {
+        return $this->heure_fin;
+    }
+    public function setHeureFin($heure_fin)
+    {
+        $this->heure_fin = $heure_fin;
+    }
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+    }
+    public function getImage()
+    {
         return $this->image;
     }
-    public function getContentURL(){
-        return $this->cotent_url;
+    public function setImage($image)
+    {
+        $this->image = $image;
     }
-    public function getCategoryID(){
+    public function getContentUrl()
+    {
+        return $this->content_url;
+    }
+    public function setContentUrl($content_url)
+    {
+        $this->content_url = $content_url;
+    }
+    public function getCategoryId()
+    {
         return $this->category_id;
     }
-    public function setEventID(){
-        return $this->event_id;
-    }
-    public function setTitre(){
-        return $this->titre;
-    }
-    public function setDescription(){
-        return $this->description;
-    }
-    public function setEventDATE(){
-        return $this->event_date;
-    }
-    public function setImage(){
-        return $this->image;
-    }
-    public function setContentURL(){
-        return $this->cotent_url;
-    }
-    public function setCategoryID(){
-        return $this->category_id;
+    public function setCategoryId($category_id)
+    {
+        $this->category_id = $category_id;
     }
 }
