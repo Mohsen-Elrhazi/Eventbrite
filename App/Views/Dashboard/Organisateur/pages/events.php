@@ -15,36 +15,55 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addEventModalLabel">Ajouter un événement</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <form id="addEventForm">
-                    <label for="titre">Titre:</label>
-                    <input type="text" id="titre" name="titre" required><br>
+                    <div class="mb-3">
+                        <label for="titre">Titre:</label>
+                        <input type="text" id="titre" name="titre" class="form-control" required>
+                    </div>
 
-                    <label for="description">Description:</label>
-                    <textarea id="description" name="description" required></textarea><br>
+                    <div class="mb-3">
+                        <label for="description">Description:</label>
+                        <textarea id="description" name="description" class="form-control" required></textarea>
+                    </div>
 
-                    <label for="image">Image:</label>
-                    <input type="text" id="image" name="image" required><br>
+                    <div class="mb-3">
+                        <label for="image">Image:</label>
+                        <input type="text" id="image" name="image" class="form-control" required>
+                    </div>
 
-                    <label for="event_date">Date:</label>
-                    <input type="date" id="event_date" name="event_date" required><br>
+                    <div class="mb-3">
+                        <label for="event_date">Date:</label>
+                        <input type="date" id="event_date" name="event_date" class="form-control" required>
+                    </div>
 
-                    <label for="heure_debut">Heure de début:</label>
-                    <input type="time" id="heure_debut" name="heure_debut" required><br>
+                    <div class="mb-3">
+                        <label for="heure_debut">Heure de début:</label>
+                        <input type="time" id="heure_debut" name="heure_debut" class="form-control" required>
+                    </div>
 
-                    <label for="heure_fin">Heure de fin:</label>
-                    <input type="time" id="heure_fin" name="heure_fin" required><br>
+                    <div class="mb-3">
+                        <label for="heure_fin">Heure de fin:</label>
+                        <input type="time" id="heure_fin" name="heure_fin" class="form-control" required>
+                    </div>
 
-                    <label for="prix">Prix:</label>
-                    <input type="number" id="prix" name="prix" required><br>
+                    <div class="mb-3">
+                        <label for="prix">Prix:</label>
+                        <input type="number" id="prix" name="prix" class="form-control" required>
+                    </div>
 
-                    <label for="content_url">URL du contenu:</label>
-                    <input type="url" id="content_url" name="content_url" required><br>
+                    <div class="mb-3">
+                        <label for="content_url">URL du contenu:</label>
+                        <input type="url" id="content_url" name="content_url" class="form-control" required>
+                    </div>
 
-                    <label for="category_id">Catégorie:</label>
-                    <input type="number" id="category_id" name="category_id" value="1" required><br>
+                    <div class="mb-3">
+                        <label for="category_id">Catégorie:</label>
+                        <input type="number" id="category_id" name="category_id" class="form-control" value="1"
+                            required>
+                    </div>
 
                     <button type="submit" class="btn btn-primary">Ajouter</button>
                 </form>
@@ -59,37 +78,58 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editEventModalLabel">Modifier l'événement</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <form id="editEventForm">
-                    <label for="titre">Titre:</label>
-                    <input type="text" id="titre" name="titre" required><br>
+                    <input type="hidden" id="event_id" name="event_id">
 
-                    <label for="description">Description:</label>
-                    <textarea id="description" name="description" required></textarea><br>
+                    <div class="mb-3">
+                        <label for="edit_titre">Titre:</label>
+                        <input type="text" id="edit_titre" name="titre" class="form-control" required>
+                    </div>
 
-                    <label for="image">Image:</label>
-                    <input type="text" id="image" name="image" required><br>
+                    <div class="mb-3">
+                        <label for="edit_description">Description:</label>
+                        <textarea id="edit_description" name="description" class="form-control" required></textarea>
+                    </div>
 
-                    <label for="event_date">Date:</label>
-                    <input type="date" id="event_date" name="event_date" required><br>
+                    <div class="mb-3">
+                        <label for="edit_image">Image:</label>
+                        <input type="text" id="edit_image" name="image" class="form-control" required>
+                    </div>
 
-                    <label for="heure_debut">Heure de début:</label>
-                    <input type="time" id="heure_debut" name="heure_debut" required><br>
+                    <div class="mb-3">
+                        <label for="edit_event_date">Date:</label>
+                        <input type="date" id="edit_event_date" name="event_date" class="form-control" required>
+                    </div>
 
-                    <label for="heure_fin">Heure de fin:</label>
-                    <input type="time" id="heure_fin" name="heure_fin" required><br>
+                    <div class="mb-3">
+                        <label for="edit_heure_debut">Heure de début:</label>
+                        <input type="time" id="edit_heure_debut" name="heure_debut" class="form-control" required>
+                    </div>
 
-                    <label for="prix">Prix:</label>
-                    <input type="number" id="prix" name="prix" required><br>
+                    <div class="mb-3">
+                        <label for="edit_heure_fin">Heure de fin:</label>
+                        <input type="time" id="edit_heure_fin" name="heure_fin" class="form-control" required>
+                    </div>
 
-                    <label for="content_url">URL du contenu:</label>
-                    <input type="url" id="content_url" name="content_url" required><br>
+                    <div class="mb-3">
+                        <label for="edit_prix">Prix:</label>
+                        <input type="number" id="edit_prix" name="prix" class="form-control" required>
+                    </div>
 
-                    <label for="category_id">Catégorie:</label>
-                    <input type="number" id="category_id" name="category_id" value="1" required><br> <button
-                        type="submit" class="btn btn-primary">Modifier</button>
+                    <div class="mb-3">
+                        <label for="edit_content_url">URL du contenu:</label>
+                        <input type="url" id="edit_content_url" name="content_url" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="edit_category_id">Catégorie:</label>
+                        <input type="number" id="edit_category_id" name="category_id" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Modifier</button>
                 </form>
             </div>
         </div>
