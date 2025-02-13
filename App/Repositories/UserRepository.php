@@ -66,7 +66,7 @@ class UserRepository
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
-    public function findById($id)
+    public function findRoleById($id)
     {
         $stmt = $this->conn->prepare("SELECT role FROM users WHERE user_id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);

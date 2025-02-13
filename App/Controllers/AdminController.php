@@ -100,7 +100,7 @@ class AdminController
     {
         $this->userRepository->updateStatus($id);
         Session::setSession('success', 'status a été changé avec success');
-        $role = $this->userRepository->findById($id);
+        $role = $this->userRepository->findRoleById($id);
 
         if ($role === "Organisateur") {
 
