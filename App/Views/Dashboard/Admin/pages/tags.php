@@ -32,12 +32,37 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="supmit" class="btn btn-primary">Ajoute</button>
+                    <button type="submit" class="btn btn-primary">Ajoute</button>
                 </div>
                 
         </form>
       </div>
 
+    </div>
+  </div>
+</div>
+
+<!-- Modal update Categorie-->
+<div class="modal fade" id="update-tag" tabindex="-1" aria-labelledby="update-tag" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier Tag</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/tags/updateTag/" method="POST">
+            <input type="hidden" name="tagId" id="updatetagId">
+            <div class="mb-3">
+                <label for="updateTitle" class="form-label">Title</label>
+                <input type="text" name="nom" class="form-control" id="updateTitle">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>   
+        </form>
+      </div>
     </div>
   </div>
 </div>
@@ -57,12 +82,15 @@
             $objetController= new TagsController();
            $tags= $objetController->listeTags();
            ?>
-                <?php foreach ($tags as $tag): ?>
-                   <?php echo $objetController->renderRow($tag); ?>
-                <?php endforeach; ?>
+               
            
         </tbody>
     </table>
 </div>
+
+<script>
+
+
+</script>
 
 

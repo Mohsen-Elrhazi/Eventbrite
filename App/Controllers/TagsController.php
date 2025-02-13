@@ -4,8 +4,10 @@ namespace App\Controllers;
 
 use App\Models\Tags;
 use App\Repositories\TagsRepository;
+use App\Services\TagService;
 use App\Services\Validation;
 use App\Core\Session;
+
 
 class TagsController
 {
@@ -44,31 +46,40 @@ class TagsController
     public function listeTags()
         {
             $tags = $this->tagsRepository->display();
-            return $tags;
+           foreach ($tags as $tag){
+            echo TagService::renderRow($tag); 
+           }
+               
+             
         }
+ 
 
-        public function renderRow($tag){
-            return "<tr>
-            <td>". $tag->getTagId()."</td>
-            <td>". $tag->getNom()."</td>
-            <td>
-                <a href='/category/updatTag/".$tag->getTagId()."' class='btn btn-warning btn-sm me-2'>
-                    <i class='fa fa-edit'></i> Modifier
-                </a>
-                <a href='/category/deleteTag/".$tag->getTagId()."' class='btn btn-danger btn-sm me-2'>
-                    <i class='fa fa-edit'></i> Supprimer
-                </a>
-            </td>
-        </tr>";
-        }
+
     public function deleteTag($id){
         $this->tagsRepository->delete($id);
         Session::setSession('success', 'Vous êtes delete tag avec succès!');
        
-        echo "deleteTag";
+        header("Location:/admin/tags");
+            exit;
     }
-    public function updatTag(){
-        echo "updatCategory";
+    public function updateTag(){
+        $id=htmlspecialchars($_POST['tagId']);
+        $nom=htmlspecialchars($_POST['nom']);
+        if (Validation::validateFields([$nom])) {
+            $tags = new Tags($nom, $id); 
+    
+            if ($this->tagsRepository->edit($tags)) {
+                Session::setSession('success', 'Vous êtes Modifier categore avec succès!');
+            } else {
+                Session::setSession('error', 'error');
+            }
+            header("Location:/admin/tags");
+            exit;
+        } else {
+            Session::setSession('error', 'Veuillez remplir tous les champs.');
+            header("Location:/admin/tags");
+            exit;
+        }
     }
   
 

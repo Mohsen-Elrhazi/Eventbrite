@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Repositories\CategoryRepository;
 use App\Services\Validation;
 use App\Core\Session;
+use App\Services\CategoryService;
 
 class CategoryController
 {
@@ -31,10 +32,9 @@ class CategoryController
                 $this->categoryRepository->save( $category);
 
                 Session::setSession('success', 'Vous êtes ajoute categore avec succès!');
-                echo "addCategory";
-                // header("Location:/admin/categories");
+                header("Location:/admin/categories");
               
-                // exit;
+                exit;
                
             
         } else {
@@ -47,33 +47,38 @@ class CategoryController
     public function listeCategories()
         {
             $categories = $this->categoryRepository->display();
-            return $categories;
+             foreach ($categories as $category){
+                echo CategoryService::renderRow($category);
+             } 
         }
 
-        public function renderRow($category){
-            return "<tr>
-            <td>". $category->getCategoryId()."</td>
-            <td>". $category->getNom()."</td>
-            <td>". $category->getDescription()."</td>
-            <td>
-                <a href='/category/updatCategory/".$category->getCategoryId()."' class='btn btn-warning btn-sm me-2'>
-                    <i class='fa fa-edit'></i> Modifier
-                </a>
-                <a href='/category/deleteCategory/".$category->getCategoryId()."' class='btn btn-danger btn-sm me-2'>
-                    <i class='fa fa-edit'></i> Supprimer
-                </a>
-            </td>
-        </tr>";
-        }
+
     public function deleteCategory($id){
         $this->categoryRepository->delete($id);
-        Session::setSession('success', 'Vous êtes delete categore avec succès!');
-       
-        echo "deleteCategory";
+        Session::setSession('success', 'Vous êtes asupprime categore avec succès!');
+                header("Location:/admin/categories");
+                exit;
     }
-    public function updatCategory(){
-        echo "updatCategory";
+    public function updateCategory(): void
+    {
+        $id = htmlspecialchars($_POST['categoryId']); 
+        $nom = htmlspecialchars($_POST['nom']); 
+        $description = htmlspecialchars($_POST['description']); 
+    
+        if (Validation::validateFields([$nom, $description])) {
+            $category = new Category($nom, $description, $id); 
+    
+            if ($this->categoryRepository->edit($category)) {
+                Session::setSession('success', 'Vous êtes Modifier categore avec succès!');
+            } else {
+                Session::setSession('error', 'error');
+            }
+            header("Location:/admin/categories");
+            exit;
+        } else {
+            Session::setSession('error', 'Veuillez remplir tous les champs.');
+            header("Location:/admin/categories");
+            exit;
+        }
     }
-  
-
 }

@@ -20,7 +20,7 @@ class CategoryRepository extends BaseRepository {
     }
    // function afficher les categories
    public function display() {
-    $stmt = $this->conn->prepare("SELECT * FROM category ORDER BY category_id ASC");
+    $stmt = $this->conn->prepare("SELECT * FROM category ORDER BY category_id DESC");
     $stmt->execute(); 
     $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $data = [];

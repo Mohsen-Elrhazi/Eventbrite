@@ -72,7 +72,6 @@ class AdminController
     }
 
 
-
     public function logoutView()
     {
         $this->renderLayout('logout');
