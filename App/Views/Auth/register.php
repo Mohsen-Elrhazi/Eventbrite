@@ -21,16 +21,6 @@ use App\Core\Session;
 <body>
 
     <div class="container">
-        <?php 
-        if(Session::hasSession('error')){
-            echo "<div class='alert alert-danger text-center'>". Session::getSession('error') ."</div>";
-            Session::removeSession('error');
-        }
-        if(Session::hasSession('success')){
-            echo "<div class='alert alert-success text-center'>". Session::getSession('success') ."</div>";
-            Session::removeSession('success');
-        }
-         ?>
 
         <div class="form-wrapper">
 
@@ -68,7 +58,9 @@ use App\Core\Session;
                 </div>
                 <button type="submit" class="btn btn-primary">S'inscrire</button>
                 <div class="forgot-password-link">
-                    <p>Vous avez déja inscrit ?<a href="auth/login" id="forgot-password-link"> Se connecter ?</a></p>
+                    <!-- <a href="auth/login" id="forgot-password-link"> Se connecter ?</a> -->
+                    <p clss="">Vous avez déja inscrit ?<a href="auth/login" id="forgot-password-link"> Se connecter
+                            ?</a></p>
                 </div>
 
             </form>
