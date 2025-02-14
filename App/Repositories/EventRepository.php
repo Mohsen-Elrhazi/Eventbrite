@@ -79,5 +79,15 @@ class EventRepository extends BaseRepository
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+             // Methode pour gérer l'inscription de l'utilisateur dans la table event_user
+             public function saveEnrollement(int $eventID, int $userID) {
+                $stmt = $this->conn->prepare("INSERT INTO event_user (user_id, event_id) VALUES (:user_id, :event_id)");
+                $stmt->execute([
+                    ':user_id' => $userID,
+                    ':event_id' => $eventID
+                  
+                ]);
+            }
+
     
 }
