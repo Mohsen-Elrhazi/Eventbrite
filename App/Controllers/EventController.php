@@ -41,7 +41,7 @@ class EventController
         
     }
 
-    public function updateView()
+    public function update()
     {
         $data = $_POST;
         $event = new Event(
