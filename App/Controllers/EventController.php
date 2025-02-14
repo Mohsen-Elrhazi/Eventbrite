@@ -20,7 +20,7 @@ class EventController
 
     public function store()
     {
-        $data = $_POST;
+              $data = $_POST;
         $event = new Event(
             $data['titre'],
             $data['description'],
@@ -30,9 +30,15 @@ class EventController
             $data['prix'],
             $data['image'],
             $data['content_url'],
-            $data['category_id']
+            $data['category_id'],
         );
-        echo $this->eventRepository->save($event);
+        
+        $eventID= $this->eventRepository->save($event);
+
+        if (isset($data['tags']) && is_array($data['tags'])) {    
+            $this->eventRepository->saveTags($eventID, $data['tags']);
+        }
+        
     }
 
     public function updateView()

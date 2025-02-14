@@ -23,4 +23,9 @@ class CategoryService{
             </td>
         </tr>";
     }
+
+
+    public static function rendreOption(Category $category) {
+        return "<option value='{$category->getCategoryId()}'>{$category->getNom()}</option>";
+    }
 }

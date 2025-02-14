@@ -1,3 +1,10 @@
+<?php 
+use App\Controllers\CategoryController;
+use App\Controllers\TagsController;
+
+$categoryController= new CategoryController();
+$tagController= new TagsController();
+?>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -62,11 +69,22 @@
 
                     <div class="mb-3">
                         <label for="category_id">Catégorie:</label>
-                        <input type="number" id="category_id" name="category_id" class="form-control" value="1"
-                            required>
+
+                        <select id="category_id" name="category_id" class="form-control">
+                            <?php 
+                            $categoryController->OptionCategories();
+                            ?>
+                        </select>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                    <div class="mb-3 d-flex flex-wrap">
+                        <?php 
+                            $tagController->checkboxTags();
+                        ?>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary" name="ajouterEvent">Ajouter</button>
                 </form>
             </div>
         </div>
@@ -78,7 +96,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editEventModalLabel">Modifier l'événement</h5>
+                <h5 class="modal-title" id="editEventModalLabel">Modifier l' événement</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
@@ -140,16 +158,17 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        loadData();
-    });
-    function loadData() {
-        $.ajax({
-            url: '/event/index',
-            success: function (response) {
-                let events = JSON.parse(response);
-                console.log(events);
-                let eventsHTML = `
+document.addEventListener('DOMContentLoaded', () => {
+    loadData();
+});
+
+function loadData() {
+    $.ajax({
+        url: '/event/index',
+        success: function(response) {
+            let events = JSON.parse(response);
+            console.log(events);
+            let eventsHTML = `
     <div class="table-container">
         <table class='table table-bordered table-striped table-hover'>
             <thead>
@@ -167,8 +186,8 @@
             </thead>
             <tbody>`;
 
-events.forEach(event => {
-    eventsHTML += `
+            events.forEach(event => {
+                eventsHTML += `
         <tr>
             <td>${event.titre}</td>
             <td>${event.description}</td>
@@ -187,54 +206,54 @@ events.forEach(event => {
                 </button>
             </td>
         </tr>`;
-                });
-                eventsHTML += "</tbody></table>";
-                $('#eventsTable').html(eventsHTML);
-            }
-        });
-    }
-
-    // Appel AJAX pour ajouter un événement
-    $('#addEventForm').submit(function (e) {
-        e.preventDefault();
-        $.ajax({
-            url: '/event/store',
-            type: 'POST',
-            data: $(this).serialize(),
-            success: function (response) {
-                // alert("Événement ajouté !");
-                // $('#addEventModal').modal('hide');
-                loadData();
-            }
-        });
+            });
+            eventsHTML += "</tbody></table>";
+            $('#eventsTable').html(eventsHTML);
+        }
     });
+}
 
-    // Fonction pour éditer un événement
-    function editEvent(id) {
-        $.ajax({
-            url: '/event/show/' + id,
-            type: 'GET',
-            success: function (response) {
-                const event = JSON.parse(response);
-                console.log(event)
-                $('#editEventForm #titre').val(event.titre);
-                $('#editEventForm #description').val(event.description);
-                $('#editEventForm #image').val(event.image);
-                $('#editEventForm #event_date').val(event.event_date);
-                $('#editEventForm #heure_debut').val(event.heure_debut);
-                $('#editEventForm #heure_fin').val(event.heure_fin);
-                $('#editEventForm #prix').val(event.prix);
-                $('#editEventForm #content_url').val(event.content_url);
-                $('#editEventForm #category_id').val(event.category_id);
-                $('#editEventForm #prix').val(event.prix);
+// Appel AJAX pour ajouter un événement
+$('#addEventForm').submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: '/event/store',
+        type: 'POST',
+        data: $(this).serialize(),
+        success: function(response) {
+            // alert("Événement ajouté !");
+            // $('#addEventModal').modal('hide');
+            loadData();
+        }
+    });
+});
 
-                $('#editEventModal').modal('show');
-            }
-        });
-    }
+// Fonction pour éditer un événement
+function editEvent(id) {
+    $.ajax({
+        url: '/event/show/' + id,
+        type: 'GET',
+        success: function(response) {
+            const event = JSON.parse(response);
+            console.log(event)
+            $('#editEventForm #titre').val(event.titre);
+            $('#editEventForm #description').val(event.description);
+            $('#editEventForm #image').val(event.image);
+            $('#editEventForm #event_date').val(event.event_date);
+            $('#editEventForm #heure_debut').val(event.heure_debut);
+            $('#editEventForm #heure_fin').val(event.heure_fin);
+            $('#editEventForm #prix').val(event.prix);
+            $('#editEventForm #content_url').val(event.content_url);
+            $('#editEventForm #category_id').val(event.category_id);
+            $('#editEventForm #prix').val(event.prix);
 
-    // Appel AJAX pour supprimer un événement
-    function deleteEvent(id) {
+            $('#editEventModal').modal('show');
+        }
+    });
+}
+
+// Appel AJAX pour supprimer un événement
+function deleteEvent(id) {
     Swal.fire({
         title: "Êtes-vous sûr ?",
         text: "Cette action est irréversible !",
@@ -249,7 +268,7 @@ events.forEach(event => {
             $.ajax({
                 url: '/event/destroy/' + id,
                 type: 'POST',
-                success: function () {
+                success: function() {
                     Swal.fire({
                         title: "Supprimé !",
                         text: "L'événement a été supprimé avec succès.",
@@ -259,7 +278,7 @@ events.forEach(event => {
                     });
                     loadData(); // Recharge la liste des événements
                 },
-                error: function () {
+                error: function() {
                     Swal.fire({
                         title: "Erreur",
                         text: "Une erreur s'est produite, veuillez réessayer.",
@@ -270,7 +289,6 @@ events.forEach(event => {
         }
     });
 }
-
 </script>
 
 <!-- <script src="public/assets/js/dashboard/organisateur/script.js"></script> -->
