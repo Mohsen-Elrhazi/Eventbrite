@@ -35,7 +35,7 @@ class EventController
         echo $this->eventRepository->save($event);
     }
 
-    public function updateView()
+    public function update()
     {
         $data = $_POST;
         $event = new Event(
