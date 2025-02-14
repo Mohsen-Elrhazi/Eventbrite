@@ -23,6 +23,7 @@ class EventController
 
     public function store()
     {
+        
               $data = $_POST;
         $event = new Event(
             $data['titre'],
@@ -38,10 +39,14 @@ class EventController
         );
         
         $eventID= $this->eventRepository->save($event);
-
+// inserer les ids des tags selectionnes dans la form ajout event dans la table event_tag
         if (isset($data['tags']) && is_array($data['tags'])) {    
             $this->eventRepository->saveTags($eventID, $data['tags']);
         }
+        
+// inserer id de user et id de event dans la table event_user
+        $userID= Session::getSession('user_id');
+        $this->eventRepository->saveEnrollement( $eventID, $userID);
         
     }
 

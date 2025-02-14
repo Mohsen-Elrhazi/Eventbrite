@@ -89,3 +89,20 @@ ADD COLUMN quantity INT DEFAULT 1,
 ALTER TABLE events
 ADD COLUMN status VARCHAR(20) NOT NULL CHECK (status IN ('Active', 'Inactive', 'Pending'));
 -- amine----------------
+
+
+-- !MOHSEN----------
+-- ajouter column 
+alter table event_user
+ Add column enrolled_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+-- drop column
+ alter table event_user
+drop column role
+
+-- afficher les user organisateur qui cree un cours ou particpant qui inscris dans un cours
+select u.nom ,e.titre from users u 
+inner join event_user eu on u.user_id = eu.user_id
+inner join events e on e.event_id = eu.event_id
+where u.role = 'Organisateur';
+-- !MOHSEN----------
