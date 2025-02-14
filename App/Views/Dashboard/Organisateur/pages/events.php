@@ -1,4 +1,3 @@
-
 <?php 
 use App\Controllers\CategoryController;
 use App\Controllers\TagsController;
@@ -9,7 +8,7 @@ $tagController= new TagsController();
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
-    .card {
+.card {
     border-radius: 15px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -67,7 +66,6 @@ $tagController= new TagsController();
 .btn-danger {
     color: white;
 }
-
 </style>
 <div class="container">
     <h1>Liste des événements</h1>
@@ -222,13 +220,14 @@ $tagController= new TagsController();
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        loadData();
-    });
-    function loadData() {
+document.addEventListener('DOMContentLoaded', () => {
+    loadData();
+});
+
+function loadData() {
     $.ajax({
         url: '/event/index',
-        success: function (response) {
+        success: function(response) {
             let events = JSON.parse(response);
             let eventsHTML = `<div class="row">`;
 
@@ -267,60 +266,59 @@ $tagController= new TagsController();
 
 
 
-    // Appel AJAX pour ajouter un événement
-    $('#addEventForm').submit(function (e) {
-        e.preventDefault();
-        $.ajax({
-            url: '/event/store',
-            type: 'POST',
-            data: $(this).serialize(),
-            success: function (response) {
-                // alert("Événement ajouté !");
-                $('#addEventModal').modal('hide');
-                loadData();
-            }
-        });
-
-
-    // Fonction pour éditer un événement
-    function editEvent(id) {
-        $.ajax({
-            url: '/event/show/' + id,
-            type: 'GET',
-            success: function (response) {
-                const event = JSON.parse(response);
-                console.log(event)
-                $('#editEventForm #titre').val(event.titre);
-                $('#editEventForm #description').val(event.description);
-                $('#editEventForm #image').val(event.image);
-                $('#editEventForm #event_date').val(event.event_date);
-                $('#editEventForm #heure_debut').val(event.heure_debut);
-                $('#editEventForm #heure_fin').val(event.heure_fin);
-                $('#editEventForm #prix').val(event.prix);
-                $('#editEventForm #content_url').val(event.content_url);
-                $('#editEventForm #category_id').val(event.category_id);
-                $('#editEventForm #prix').val(event.prix);
-
-                $('#editEventModal').modal('show');
-            }
-        });
-    }
-
-    $('#editEventForm').submit(function (e) {
-        e.preventDefault();
-        $.ajax({
-            url: '/event/update',
-            type: 'POST',
-            data: $(this).serialize(),
-            success: function (response) {
-                // alert("Événement ajouté !");
-                $('#editEventModal').modal('hide');
-                loadData();
-            }
-        });
+// Appel AJAX pour ajouter un événement
+$('#addEventForm').submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: '/event/store',
+        type: 'POST',
+        data: $(this).serialize(),
+        success: function(response) {
+            // alert("Événement ajouté !");
+            // $('#addEventModal').modal('hide');
+            loadData();
+        }
     });
+});
+// Fonction pour éditer un événement
+function editEvent(id) {
+    $.ajax({
+        url: '/event/show/' + id,
+        type: 'GET',
+        success: function(response) {
+            const event = JSON.parse(response);
+            console.log(event)
+            $('#editEventForm #titre').val(event.titre);
+            $('#editEventForm #description').val(event.description);
+            $('#editEventForm #image').val(event.image);
+            $('#editEventForm #event_date').val(event.event_date);
+            $('#editEventForm #heure_debut').val(event.heure_debut);
+            $('#editEventForm #heure_fin').val(event.heure_fin);
+            $('#editEventForm #prix').val(event.prix);
+            $('#editEventForm #content_url').val(event.content_url);
+            $('#editEventForm #category_id').val(event.category_id);
+            $('#editEventForm #prix').val(event.prix);
 
-    
+            $('#editEventModal').modal('show');
+        }
+    });
+}
+
+$('#editEventForm').submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: '/event/update',
+        type: 'POST',
+        data: $(this).serialize(),
+        success: function(response) {
+            // alert("Événement ajouté !");
+            $('#editEventModal').modal('hide');
+            loadData();
+        }
+    });
+});
+
+
 
 
 // Appel AJAX pour supprimer un événement

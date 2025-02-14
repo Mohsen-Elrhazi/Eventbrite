@@ -16,7 +16,7 @@ class EventRepository extends BaseRepository
     public function save($event)
     {
         $stmt = $this->conn->prepare("INSERT INTO events (titre, description, event_date, heure_debut, heure_fin, prix, image, content_url, category_id,status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
-        return $stmt->execute([
+         $stmt->execute([
 
             $event->getTitre(),
             $event->getDescription(),
@@ -81,4 +81,3 @@ class EventRepository extends BaseRepository
 
     
 }
-
