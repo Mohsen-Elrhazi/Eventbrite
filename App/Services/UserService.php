@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Models\Event;
 
 class UserService
 {
@@ -30,4 +31,11 @@ class UserService
         </td>
     </tr>";
     }
+
+
+
+
+
+   
+    
 }

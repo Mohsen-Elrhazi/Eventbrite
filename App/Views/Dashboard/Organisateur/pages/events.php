@@ -1,13 +1,21 @@
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<?php 
+use App\Controllers\EventController;
+
+$eventController=new EventController();
+?>
 <div class="container">
     <h1>Liste des événements</h1>
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEventModal">Ajouter un événement</button>
 
     <div id="eventsTable">
-        <!-- Les événements seront chargés ici via AJAX -->
+        Les événements seront chargés ici via AJAX
     </div>
+
+
 </div>
 
 <!-- Modal Ajouter un événement -->
