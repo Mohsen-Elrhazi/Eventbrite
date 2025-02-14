@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Event;
@@ -14,8 +15,9 @@ class EventRepository extends BaseRepository
 
     public function save($event)
     {
-        $stmt = $this->conn->prepare("INSERT INTO events (titre, description, event_date, heure_debut, heure_fin, prix, image, content_url, category_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-       $stmt->execute([
+        $stmt = $this->conn->prepare("INSERT INTO events (titre, description, event_date, heure_debut, heure_fin, prix, image, content_url, category_id,status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
+        return $stmt->execute([
+
             $event->getTitre(),
             $event->getDescription(),
             $event->getEventDate(),
@@ -24,7 +26,8 @@ class EventRepository extends BaseRepository
             $event->getPrix(),
             $event->getImage(),
             $event->getContentUrl(),
-            $event->getCategoryId()
+            $event->getCategoryId(),
+            $event->getStatus()
         ]);
 
         $eventID= $this->conn->lastInsertId();   
@@ -75,4 +78,7 @@ class EventRepository extends BaseRepository
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    
 }
+

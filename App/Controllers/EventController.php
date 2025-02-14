@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\Event;
 use App\Repositories\EventRepository;
+use App\Services\EventService;
+use App\core\Session;
 
 class EventController
 {
@@ -31,6 +34,7 @@ class EventController
             $data['image'],
             $data['content_url'],
             $data['category_id'],
+            'Inactive'
         );
         
         $eventID= $this->eventRepository->save($event);
@@ -68,4 +72,8 @@ class EventController
     {
         echo json_encode($this->eventRepository->findByID($id));
     }
+
+
+ 
+}
 }

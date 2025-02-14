@@ -1,3 +1,4 @@
+
 <?php 
 use App\Controllers\CategoryController;
 use App\Controllers\TagsController;
@@ -29,6 +30,7 @@ $tagController= new TagsController();
 .card-body {
     padding: 20px;
 }
+
 
 .card-title {
     font-size: 1.25rem;
@@ -71,9 +73,12 @@ $tagController= new TagsController();
     <h1>Liste des événements</h1>
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEventModal">Ajouter un événement</button>
 
+
     <div id="eventsContainer" class="container mt-4">
         <!-- Les événements seront chargés ici via AJAX -->
     </div>
+
+
 </div>
 
 <!-- Modal Ajouter un événement -->

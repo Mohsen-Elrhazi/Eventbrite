@@ -85,4 +85,7 @@ ADD COLUMN quantity INT DEFAULT 1,
 
 
 
-
+-- amine----------------
+ALTER TABLE events
+ADD COLUMN status VARCHAR(20) NOT NULL CHECK (status IN ('Active', 'Inactive', 'Pending'));
+-- amine----------------
