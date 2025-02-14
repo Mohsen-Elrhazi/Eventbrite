@@ -23,7 +23,7 @@ class EventController
 
     public function store()
     {
-        $data = $_POST;
+              $data = $_POST;
         $event = new Event(
             $data['titre'],
             $data['description'],
@@ -36,10 +36,16 @@ class EventController
             $data['category_id'],
             'Inactive'
         );
-        echo $this->eventRepository->save($event);
+        
+        $eventID= $this->eventRepository->save($event);
+
+        if (isset($data['tags']) && is_array($data['tags'])) {    
+            $this->eventRepository->saveTags($eventID, $data['tags']);
+        }
+        
     }
 
-    public function updateView()
+    public function update()
     {
         $data = $_POST;
         $event = new Event(
@@ -67,5 +73,7 @@ class EventController
         echo json_encode($this->eventRepository->findByID($id));
     }
 
+
  
+}
 }

@@ -29,7 +29,7 @@ use App\Core\Session;
                 </div>
                 <button type="submit" class="btn btn-primary">Réinitialiser le mot de passe</button>
                 <div class="forgot-password-link">
-                    <a href="#" id="back-to-login-link">Retour à la connexion</a>
+                    <a href="/auth/login" id="back-to-login-link">Retour à la connexion</a>
                 </div>
             </form>
 

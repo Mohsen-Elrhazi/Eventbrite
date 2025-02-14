@@ -48,9 +48,15 @@ class TagsController
             $tags = $this->tagsRepository->display();
            foreach ($tags as $tag){
             echo TagService::renderRow($tag); 
-           }
-               
-             
+           }   
+        }
+
+        public function checkboxTags()
+        {
+            $tags = $this->tagsRepository->display();
+           foreach ($tags as $tag){
+            echo TagService::rendreCheckbox($tag); 
+           }   
         }
  
 

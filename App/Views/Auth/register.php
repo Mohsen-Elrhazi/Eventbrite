@@ -23,6 +23,7 @@ use App\Core\Session;
     <div class="container">
 
         <div class="form-wrapper">
+            <?php require_once dirname(__DIR__) . '../Includes/messages.php';  ?>
 
             <!-- Formulaire d'inscription -->
             <form id="register-form" class="form" action="/auth/register" method="POST">
@@ -59,7 +60,7 @@ use App\Core\Session;
                 <button type="submit" class="btn btn-primary">S'inscrire</button>
                 <div class="forgot-password-link">
                     <!-- <a href="auth/login" id="forgot-password-link"> Se connecter ?</a> -->
-                    <p clss="">Vous avez déja inscrit ?<a href="auth/login" id="forgot-password-link"> Se connecter
+                    <p clss="">Vous avez déja inscrit ?<a href="/auth/login" id="forgot-password-link"> Se connecter
                             ?</a></p>
                 </div>
 

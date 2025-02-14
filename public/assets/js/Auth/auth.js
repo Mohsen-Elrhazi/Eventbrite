@@ -6,3 +6,4 @@ setTimeout(function () {
     alertElement.style.display = "none";
   }
 }, 2000);
+

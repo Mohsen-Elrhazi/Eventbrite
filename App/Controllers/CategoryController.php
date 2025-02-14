@@ -51,6 +51,14 @@ class CategoryController
                 echo CategoryService::renderRow($category);
              } 
         }
+        
+        public function OptionCategories()
+        {
+            $categories = $this->categoryRepository->display();
+             foreach ($categories as $category){
+                echo CategoryService::rendreOption($category);
+             } 
+        }
 
 
     public function deleteCategory($id){
