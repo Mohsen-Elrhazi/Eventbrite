@@ -22,4 +22,13 @@ class TagService{
             </td>
     </tr>";
     }
+
+    public static function rendreCheckbox(Tags $tag) {
+        $tagID = $tag->getTagId();  
+        $tagName = $tag->getNom();
+        return "<div  class='me-3 d-inline'> 
+                <input type='checkbox' id='{$tagID}' name='tags[]' value='{$tagID}' style='transform: scale(1.6); margin-bottom :12px;'>
+                <label for='{$tagID}'>{$tagName}</label>  
+                </div> ";
+    }
 }

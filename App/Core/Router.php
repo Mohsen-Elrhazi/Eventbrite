@@ -8,6 +8,8 @@ class Router{
     private  string $controller;
     private string $method;
     private int $param;
+
+    
     public function dispatch(){
         
         //Recuperer URL

@@ -19,6 +19,7 @@
     <div class="container">
 
         <div class="form-wrapper">
+            <?php require_once dirname(__DIR__) . '../Includes/messages.php';  ?>
 
             <!-- Formulaire de connexion -->
             <form id="login-form" class="form" action="/auth/login" method="POST">
@@ -34,7 +35,9 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Se connecter</button>
                 <div class="forgot-password-link">
-                    <a href="#" id="forgot-password-link">Mot de passe oublié ?</a>
+                    <span class="fs-6">Vous n'avez pas de compte ? </span> <a href="/auth/register"
+                        id="forgot-password-link">Inscrivez-vous</a><br>
+                    <a href="/auth/forgotPassword" id="forgot-password-link">Mot de passe oublié ?</a>
                 </div>
             </form>
 

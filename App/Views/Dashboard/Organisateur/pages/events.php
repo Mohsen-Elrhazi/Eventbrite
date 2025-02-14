@@ -1,3 +1,10 @@
+<?php 
+use App\Controllers\CategoryController;
+use App\Controllers\TagsController;
+
+$categoryController= new CategoryController();
+$tagController= new TagsController();
+?>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
@@ -121,11 +128,22 @@
 
                     <div class="mb-3">
                         <label for="category_id">Catégorie:</label>
-                        <input type="number" id="category_id" name="category_id" class="form-control" value="1"
-                            required>
+
+                        <select id="category_id" name="category_id" class="form-control">
+                            <?php 
+                            $categoryController->OptionCategories();
+                            ?>
+                        </select>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                    <div class="mb-3 d-flex flex-wrap">
+                        <?php 
+                            $tagController->checkboxTags();
+                        ?>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary" name="ajouterEvent">Ajouter</button>
                 </form>
             </div>
         </div>
@@ -137,7 +155,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editEventModalLabel">Modifier l'événement</h5>
+                <h5 class="modal-title" id="editEventModalLabel">Modifier l' événement</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
@@ -257,7 +275,7 @@
                 loadData();
             }
         });
-    });
+
 
     // Fonction pour éditer un événement
     function editEvent(id) {
@@ -297,8 +315,12 @@
         });
     });
 
-    // Appel AJAX pour supprimer un événement
-    function deleteEvent(id) {
+    
+
+
+// Appel AJAX pour supprimer un événement
+function deleteEvent(id) {
+
     Swal.fire({
         title: "Êtes-vous sûr ?",
         text: "Cette action est irréversible !",
@@ -313,7 +335,7 @@
             $.ajax({
                 url: '/event/destroy/' + id,
                 type: 'POST',
-                success: function () {
+                success: function() {
                     Swal.fire({
                         title: "Supprimé !",
                         text: "L'événement a été supprimé avec succès.",
@@ -323,7 +345,7 @@
                     });
                     loadData(); // Recharge la liste des événements
                 },
-                error: function () {
+                error: function() {
                     Swal.fire({
                         title: "Erreur",
                         text: "Une erreur s'est produite, veuillez réessayer.",
@@ -334,7 +356,6 @@
         }
     });
 }
-
 </script>
 
 <!-- <script src="public/assets/js/dashboard/organisateur/script.js"></script> -->
