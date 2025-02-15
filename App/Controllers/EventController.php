@@ -23,8 +23,8 @@ class EventController
 
     public function store()
     {
-        
-              $data = $_POST;
+
+        $data = $_POST;
         $event = new Event(
             $data['titre'],
             $data['description'],
@@ -37,17 +37,16 @@ class EventController
             $data['category_id'],
             'Inactive'
         );
-        
-        $eventID= $this->eventRepository->save($event);
-// inserer les ids des tags selectionnes dans la form ajout event dans la table event_tag
-        if (isset($data['tags']) && is_array($data['tags'])) {    
+
+        $eventID = $this->eventRepository->save($event);
+        // inserer les ids des tags selectionnes dans la form ajout event dans la table event_tag
+        if (isset($data['tags']) && is_array($data['tags'])) {
             $this->eventRepository->saveTags($eventID, $data['tags']);
         }
-        
-// inserer id de user et id de event dans la table event_user
-        $userID= Session::getSession('user_id');
-        $this->eventRepository->saveEnrollement( $eventID, $userID);
-        
+
+        // inserer id de user et id de event dans la table event_user
+        $userID = Session::getSession('user_id');
+        $this->eventRepository->saveEnrollement($eventID, $userID);
     }
 
     public function update()
@@ -79,5 +78,36 @@ class EventController
     }
 
 
- 
+    public function displayEvents()
+    {
+        $role = Session::getSession('role');
+        $events = $this->eventRepository->display1($role);
+
+if ($role==="Admin") {
+    foreach ($events as $event) {
+        echo EventService::renderRowEvents(event: $event);
+    }
+} elseif ($role==="Participant") {
+    foreach ($events as $event) {
+        echo EventService::renderRowEventsParticipant(event: $event);
+    }
+}else {
+    foreach ($events as $event) {
+        echo EventService::renderRowEventsVisteur(event: $event);
+    }
+}
+
+
+      
+    }
+
+    public function updateEventsStatus(int $id)
+    {
+        $this->eventRepository->updateEventStatus($id);
+        Session::setSession('success', 'status a été changé avec success');
+        $role = $this->eventRepository->findByID($id);
+        header("location:/admin/events/");
+
+        exit();
+    }
 }

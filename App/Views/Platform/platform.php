@@ -1,3 +1,9 @@
+<?php
+session_start();
+use App\Controllers\EventController;
+
+$eventController = new EventController();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -168,7 +174,9 @@
         <h2 style="text-align:center;">Events </h2>
 
         <div class='cards-cours'>
-
+        <?php
+            $eventController->displayEvents();
+            ?>
         </div>
     </section>
     <!--fin affichage des courses -->
