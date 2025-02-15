@@ -1,7 +1,9 @@
 <!-- footer -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="/public/assets/js/Dashboard/Admin/admin.js"> </script>
 <script src="/public/assets/js/Dashboard/Admin/updateCategory.js"> </script>
 <script src="/public/assets/js/Dashboard/Admin/updateTag.js"> </script>
+<script src="/public/assets/js/Dashboard/Admin/chart.js"> </script>
 
 <!-- bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
