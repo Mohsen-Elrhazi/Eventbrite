@@ -99,6 +99,9 @@ class EventRepository extends BaseRepository
         if ($role === 'Participant') {
             $query .= " WHERE e.status = 'Active'";
         } elseif ($role === 'Admin') {
+        }else{
+            $query .= " WHERE e.status = 'Active'";
+            
         }
 
         $stmt = $this->conn->prepare($query);
