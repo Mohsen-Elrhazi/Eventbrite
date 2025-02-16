@@ -61,12 +61,22 @@ class CategoryController
         }
 
 
-    public function deleteCategory($id){
-        $this->categoryRepository->delete($id);
-        Session::setSession('success', 'Vous êtes asupprime categore avec succès!');
-                header("Location:/admin/categories");
+        public function deleteCategory(): void
+        {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+                $id = $_POST['id'];
+                if ($this->categoryRepository->delete($id)) {
+                    echo json_encode(['status' => 'success']); 
+                } else {
+                    echo json_encode(['status' => 'error', 'message' => 'Error deleting category']);
+                }
                 exit;
-    }
+            } 
+        }
+        
+
+
+
     public function updateCategory(): void
     {
         $id = htmlspecialchars($_POST['categoryId']); 
