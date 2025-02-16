@@ -122,4 +122,8 @@ if ($role==="Admin") {
      $event = $this->eventRepository->findById($id);
       return $event;
     }
+
+    public function details(){
+        require_once dirname(__DIR__, 1) . '\Views\Platform\details.php';
+    }
 }

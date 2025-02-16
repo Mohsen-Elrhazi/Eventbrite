@@ -34,4 +34,6 @@ class ticketController{
         $this->ticketRepository->save($ticket);
         header("location:/");
     }
+
+
 }
