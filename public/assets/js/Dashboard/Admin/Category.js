@@ -24,7 +24,7 @@ function deleteCategory(id) {
         text: 'Cette catégorie sera supprimée !',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'supprimer',
+        confirmButtonText: 'oui',
         cancelButtonText: 'Annuler',
         reverseButtons: true
     }).then((result) => {
@@ -43,8 +43,8 @@ function deleteCategory(id) {
                     document.getElementById('category-row-' + id).remove();
                  
                     Swal.fire(
-                        'Supprimée!',
-                        'La catégorie a été supprimée avec succès.',
+                        'Succès!',
+                        data.message,
                         'success'
                     );
                 } else {
@@ -60,8 +60,8 @@ function deleteCategory(id) {
                 console.error('Error:', error);
                 Swal.fire(
                     'Erreur!',
-                    'Une erreur est survenue lors de la suppression.',
-                    'error'
+                    data.message,
+                    'success'
                 );
             });
         }
@@ -113,3 +113,50 @@ document.querySelector("#update-categorie form").addEventListener("submit", func
 
 
 
+
+
+
+
+//insertion avec fetch 
+
+document.querySelector("#add-categorie form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    let formData = new FormData(this);
+
+    fetch('/category/addCategory', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json()) 
+    .then(data => {
+        if (data.status === 'success') {
+            Swal.fire(
+                'Succès!',
+                data.message,
+                'success'
+            );
+            this.reset();
+            let modal = bootstrap.Modal.getInstance(document.getElementById('add-categorie'));
+            modal.hide();
+        }
+        else {
+            Swal.fire(
+                'Erreur!',
+                data.message,
+                'error'
+            );
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        Swal.fire(
+            'Erreur!',
+            'Une erreur est survenue lors de l\'insertion.',
+            'error'
+        );
+    });
+});
+document.getElementById('add-categorie').addEventListener('show.bs.modal', function () {
+    const form = document.querySelector("#add-categorie form");
+    form.reset();
+});

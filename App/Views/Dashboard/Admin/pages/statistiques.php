@@ -17,7 +17,7 @@ $totals = $data['totals'];
 <div class="container">
     <div class="row text-center">
         <!-- Category Card -->
-        <div class="col-md-3 col-sm-6 mb-4 "> 
+        <div class=" col-md-3 col-sm-6 mb-4 "> 
             <div class=" shadow-sm pt-2">
                 <div class="card-body">
                     <i class="fas fa-cogs fa-2x mb-3 text-primary"></i> 
