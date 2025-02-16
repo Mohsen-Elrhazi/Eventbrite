@@ -38,6 +38,8 @@
     </div>
 </div>
 <!-- Modal update Categorie-->
+<!-- Modal update Categorie-->
+
 <div class="modal fade" id="update-categorie" tabindex="-1" aria-labelledby="update-categorie" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -46,15 +48,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/category/updateCategory/" method="POST">
+                <form action="/category/updateCategory" method="POST">
                     <input type="hidden" name="categoryId" id="updateCategoryId">
                     <div class="mb-3">
                         <label for="updateTitle" class="form-label">Title</label>
                         <input type="text" name="nom" class="form-control" id="updateTitle">
                     </div>
                     <div class="form-floating">
-                        <textarea class="form-control" name="description" id="updateDescription"
-                            placeholder="Leave a comment here"></textarea>
+                        <textarea class="form-control" name="description" id="updateDescription" placeholder="Leave a comment here"></textarea>
                         <label for="updateDescription">Description</label>
                     </div>
                     <div class="modal-footer">
@@ -66,6 +67,7 @@
         </div>
     </div>
 </div>
+
 
 <!--Liste des Catégories-->
 <div class="container mt-5">
@@ -93,8 +95,3 @@
 
 
 
-
-<script>
- 
-
-</script>

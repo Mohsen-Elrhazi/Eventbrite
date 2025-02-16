@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+
 //delete category avec fetch 
 function deleteCategory(id) {
     Swal.fire({
@@ -65,4 +67,49 @@ function deleteCategory(id) {
         }
     });
 }
+
+//update category avec fetch 
+
+document.querySelector("#update-categorie form").addEventListener("submit", function(event) {
+    event.preventDefault(); 
+
+    let formData = new FormData(this); 
+    console.log([...formData.entries()]);
+
+    fetch('/category/updateCategory', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+           if (data.status === 'success') {
+            Swal.fire(
+                'Modifié!',
+                data.message,
+                'success'
+            );
+            document.getElementById('category-row-' + formData.get('categoryId')).querySelector('td:nth-child(2)').textContent = formData.get('nom');
+            document.getElementById('category-row-' + formData.get('categoryId')).querySelector('td:nth-child(3)').textContent = formData.get('description');
+       
+                document.getElementById('update-categorie').style.display = 'none';
+                document.querySelector('.modal-backdrop').style.display = 'none';
+        } else {
+            Swal.fire(
+                'Erreur!',
+                data.message,
+                'error'
+            );
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        Swal.fire(
+            'Erreur!',
+            'Une erreur est survenue lors de la modification.',
+            'error'
+        );
+    });
+});
+
+
 

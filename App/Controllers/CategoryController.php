@@ -16,10 +16,6 @@ class CategoryController
     {
         $this->categoryRepository= new CategoryRepository();
     }
-    public function delet(){
-        echo "delete";
-    }
-
     public function addCategory(): void
     {
         $nom = htmlspecialchars($_POST["nom"]);
@@ -77,26 +73,27 @@ class CategoryController
 
 
 
-    public function updateCategory(): void
-    {
-        $id = htmlspecialchars($_POST['categoryId']); 
-        $nom = htmlspecialchars($_POST['nom']); 
-        $description = htmlspecialchars($_POST['description']); 
-    
-        if (Validation::validateFields([$nom, $description])) {
-            $category = new Category($nom, $description, $id); 
-    
-            if ($this->categoryRepository->edit($category)) {
-                Session::setSession('success', 'Vous êtes Modifier categore avec succès!');
+        public function updateCategory(): void
+        {
+            $id = htmlspecialchars($_POST['categoryId']);
+            $nom = htmlspecialchars($_POST['nom']);
+            $description = htmlspecialchars($_POST['description']);
+        
+            if (Validation::validateFields([$nom, $description])) {
+                $category = new Category($nom, $description, $id);
+        
+                if ($this->categoryRepository->edit($category)) {
+                    echo json_encode(['status' => 'success', 'message' => 'La catégorie a été modifiée avec succès!']);
+                } else {
+                    echo json_encode(['status' => 'error', 'message' => 'Une erreur est survenue lors de la modification.']);
+                }
+                exit;
             } else {
-                Session::setSession('error', 'error');
+                echo json_encode(['status' => 'error', 'message' => 'Veuillez remplir tous les champs.']);
+                exit;
             }
-            header("Location:/admin/categories");
-            exit;
-        } else {
-            Session::setSession('error', 'Veuillez remplir tous les champs.');
-            header("Location:/admin/categories");
-            exit;
         }
-    }
+        
+
+
 }
