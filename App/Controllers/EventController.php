@@ -18,13 +18,14 @@ class EventController
 
     public function indexView()
     {
-        echo json_encode($this->eventRepository->display());
+        $userID = Session::getSession('user_id');
+        echo json_encode($this->eventRepository->displayOrganisateur($userID));
     }
 
     public function store()
     {
-        
-              $data = $_POST;
+
+        $data = $_POST;
         $event = new Event(
             $data['titre'],
             $data['description'],
@@ -37,17 +38,17 @@ class EventController
             $data['category_id'],
             'Inactive'
         );
-        
-        $eventID= $this->eventRepository->save($event);
-// inserer les ids des tags selectionnes dans la form ajout event dans la table event_tag
-        if (isset($data['tags']) && is_array($data['tags'])) {    
+
+        $eventID = $this->eventRepository->save($event);
+        // inserer les ids des tags selectionnes dans la form ajout event dans la table event_tag
+        if (isset($data['tags']) && is_array($data['tags'])) {
             $this->eventRepository->saveTags($eventID, $data['tags']);
         }
-        
-// inserer id de user et id de event dans la table event_user
-        $userID= Session::getSession('user_id');
-        $this->eventRepository->saveEnrollement( $eventID, $userID);
-        
+
+        // inserer id de user et id de event dans la table event_user
+        $userID = Session::getSession('user_id');
+        $this->eventRepository->saveEnrollement($eventID, $userID);
+
     }
 
     public function update()
@@ -63,9 +64,15 @@ class EventController
             $data['image'],
             $data['content_url'],
             $data['category_id'],
+            'Active',
             $data['event_id']
         );
-        echo $this->eventRepository->edit($event);
+        // print_r($event);
+        // print($data['event_id']);
+        $this->eventRepository->edit($event);
+        if (isset($data['tags']) && is_array($data['tags'])) {
+            $this->eventRepository->editTags($data['event_id'], $data['tags']);
+        }
     }
 
     public function destroy($id)
@@ -76,8 +83,5 @@ class EventController
     public function showView($id)
     {
         echo json_encode($this->eventRepository->findByID($id));
-    }
-
-
- 
+     }
 }
