@@ -42,3 +42,11 @@ document.querySelectorAll("a").forEach(function (link) {
     };
   });
 });
+
+
+
+
+
+
+
+//*****************Rocherche********************** */

@@ -1,7 +1,8 @@
-<?php 
+<?php
+
 use App\Controllers\EventController;
 
-$eventController=new EventController();
+$eventController = new EventController();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,20 +18,9 @@ $eventController=new EventController();
 
     <div class="container mt-5">
         <div class="row">
-            <!-- <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Event Image">
-                    <div class="card-body">
-                        <h5 class="card-title">Event Title 1</h5>
-                        <p class="card-text"><strong>Organizer:</strong> Organizer Name 1</p>
-                        <p class="card-text"><strong>Price:</strong> $50</p>
-                        <a href="#" class="btn btn-primary">activate</a>
-                    </div>
-                </div>
-            </div> -->
-<?php 
-// $eventController->displayEvents();
-?>
+            <?php
+            $eventController->displayEvents();
+            ?>
 
         </div>
     </div>

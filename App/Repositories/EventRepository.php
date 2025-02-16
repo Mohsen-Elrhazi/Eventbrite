@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Event;
 use PDO;
+use PDOException;
 
 class EventRepository extends BaseRepository
 {
@@ -71,6 +72,7 @@ class EventRepository extends BaseRepository
             $stmt->execute([':event_id' => $eventID]);
 
             // Réinsérer les nouveaux tags
+
             $stmt = $this->conn->prepare("INSERT INTO event_tag (event_id, tag_id) VALUES (:event_id, :tag_id)");
             foreach ($tagsID as $tagID) {
                 $stmt->execute([
@@ -78,10 +80,9 @@ class EventRepository extends BaseRepository
                     ':tag_id' => $tagID,
                 ]);
             }
-
             $this->conn->commit();
         } catch (PDOException $e) {
-            die("Erreur lors de la mise à jour des tags : " . $e->getMessage());
+            die("Erreur lors de la mise à jour des tags : " . $e->getMessage());      
         }
     }
 
@@ -122,7 +123,52 @@ class EventRepository extends BaseRepository
         $stmt->execute([
             ':user_id' => $userID,
             ':event_id' => $eventID
-
         ]);
+    }
+
+
+    public function display1($role)
+    {
+        $query = "SELECT e.* FROM events e";
+
+        if ($role === 'Participant') {
+            $query .= " WHERE e.status = 'Active'";
+        } elseif ($role === 'Admin') {
+        }else{
+            $query .= " WHERE e.status = 'Active'";
+            
+        }
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->execute();
+
+        $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $data = [];
+
+        foreach ($events as $event) {
+            $data[] = new Event(
+                $event['titre'],
+                $event['description'],
+                $event['event_date'],
+                $event['heure_debut'],
+                $event['heure_fin'],
+                $event['prix'],
+                $event['image'],
+                $event['content_url'],
+                $event['category_id'],
+                $event['status'],
+                $event['event_id']
+            );
+        }
+
+        return $data;
+    }
+    public function updateEventStatus($id)
+    {
+        $stmt = $this->conn->prepare("UPDATE events SET status = CASE WHEN status = 'Active' THEN 'Inactive' ELSE 'Active' END WHERE event_id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
     }
 }

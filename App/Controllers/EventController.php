@@ -84,4 +84,42 @@ class EventController
     {
         echo json_encode($this->eventRepository->findByID($id));
      }
+
+    public function displayEvents()
+    {
+        $role = Session::getSession('role');
+        $events = $this->eventRepository->display1($role);
+
+if ($role==="Admin") {
+    foreach ($events as $event) {
+        echo EventService::renderRowEvents(event: $event);
+    }
+} elseif ($role==="Participant") {
+    foreach ($events as $event) {
+        echo EventService::renderRowEventsParticipant(event: $event);
+    }
+}else {
+    foreach ($events as $event) {
+        echo EventService::renderRowEventsVisteur(event: $event);
+    }
+}
+
+
+      
+    }
+
+    public function updateEventsStatus(int $id)
+    {
+        $this->eventRepository->updateEventStatus($id);
+        Session::setSession('success', 'status a été changé avec success');
+        $role = $this->eventRepository->findByID($id);
+        header("location:/admin/events/");
+
+        exit();
+    }
+
+    public function getEvent(int $id){
+     $event = $this->eventRepository->findById($id);
+      return $event;
+    }
 }

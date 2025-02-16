@@ -4,13 +4,14 @@
         use App\Controllers\CategoryController;
 
 ?>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-categorie">
     Ajoute Categorie
 </button>
 
 <!-- Modal Create Categorie-->
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="add-categorie" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -30,7 +31,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="supmit" class="btn btn-primary">Ajoute</button>
+                        <button type="submit" class="btn btn-primary">Ajoute</button>
                     </div>
                 </form>
             </div>
@@ -38,6 +39,8 @@
     </div>
 </div>
 <!-- Modal update Categorie-->
+<!-- Modal update Categorie-->
+
 <div class="modal fade" id="update-categorie" tabindex="-1" aria-labelledby="update-categorie" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -46,15 +49,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/category/updateCategory/" method="POST">
+                <form action="/category/updateCategory" method="POST">
                     <input type="hidden" name="categoryId" id="updateCategoryId">
                     <div class="mb-3">
                         <label for="updateTitle" class="form-label">Title</label>
                         <input type="text" name="nom" class="form-control" id="updateTitle">
                     </div>
                     <div class="form-floating">
-                        <textarea class="form-control" name="description" id="updateDescription"
-                            placeholder="Leave a comment here"></textarea>
+                        <textarea class="form-control" name="description" id="updateDescription" placeholder="Leave a comment here"></textarea>
                         <label for="updateDescription">Description</label>
                     </div>
                     <div class="modal-footer">
@@ -66,6 +68,7 @@
         </div>
     </div>
 </div>
+
 
 <!--Liste des Catégories-->
 <div class="container mt-5">
@@ -90,3 +93,6 @@
         </tbody>
     </table>
 </div>
+
+
+

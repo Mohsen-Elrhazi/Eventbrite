@@ -61,7 +61,7 @@ use App\Core\Session;
                 <div class="forgot-password-link">
                     <!-- <a href="auth/login" id="forgot-password-link"> Se connecter ?</a> -->
                     <p clss="">Vous avez déja inscrit ?<a href="/auth/login" id="forgot-password-link"> Se connecter
-                            ?</a></p>
+                        </a></p>
                 </div>
 
             </form>

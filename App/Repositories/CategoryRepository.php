@@ -13,10 +13,18 @@ class CategoryRepository extends BaseRepository {
             throw new InvalidArgumentException("L'objet doit être une instance de Category");
         }
         $stmt = $this->conn->prepare("INSERT INTO category (nom, description) VALUES (:nom, :description)");
-        $stmt->execute([
-            ':nom' => $object->getNom(),
-            ':description' => $object->getDescription()
-        ]);
+        try {
+            $stmt->execute([
+                ':nom' => $object->getNom(),
+                ':description' => $object->getDescription()
+            ]);
+            return true;  
+        } catch (\PDOException $e) {
+         
+            echo json_encode(['status' => 'error', 'message' => 'Erreur de base de données: ' . $e->getMessage()]);
+            return false; 
+        }
+
     }
    // function afficher les categories
    public function display() {
