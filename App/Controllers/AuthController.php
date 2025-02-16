@@ -130,6 +130,11 @@ class AuthController
          }
     }
 
+    public function logoutView(){
+        Session::destroySession();
+         header("Location: /platform");
+    }
+
 
     
 }

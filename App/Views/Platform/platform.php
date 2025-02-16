@@ -53,7 +53,7 @@ $eventController = new EventController();
             <!-- <a href="#" class="business-link">Udemy Business</a> -->
             <a href="/auth/login" class="login-btn" id="login-btn">Se connecter</a>
             <a href="/auth/register" class="signup-btn" id="signup-btn">S'inscrire</a>
-            <a href="../../../index.php?page=logout" class="signup-btn">Logout</a>
+            <a href="/auth/logout" class="signup-btn">Logout</a>
             <div class="cart-container">
                 <i class="fas fa-shopping-cart cart-icon"></i>
                 <span class="cart-badge">0</span>
@@ -174,7 +174,7 @@ $eventController = new EventController();
         <h2 style="text-align:center;">Events </h2>
 
         <div class='cards-cours'>
-        <?php
+            <?php
             $eventController->displayEvents();
             ?>
         </div>
