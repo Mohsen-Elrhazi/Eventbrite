@@ -4,14 +4,11 @@ class Tickets {
     private $ticket_id;
     private $event_id;
     private $user_id;
-    private $status;
-    private $prix_total;
     private $quantity;
-    public function __construct($event_id, $user_id, $status = 'Pending', $prix_total = 0.00, $quantity = 1,$ticket_id=null ) {
+    
+    public function __construct($event_id, $user_id, $quantity,$ticket_id=null ) {
         $this->event_id = $event_id;
         $this->user_id = $user_id;
-        $this->status = $status;
-        $this->prix_total = $prix_total;
         $this->quantity = $quantity;
         $this->ticket_id=$ticket_id;
            }
@@ -27,13 +24,6 @@ class Tickets {
         return $this->user_id;
     }
 
-    public function getStatus() {
-        return $this->status;
-    }
-
-    public function getPrixTotal() {
-        return $this->prix_total;
-    }
 
     public function getQuantity() {
         return $this->quantity;
@@ -50,15 +40,6 @@ class Tickets {
 
     public function setUserId($user_id) {
         $this->user_id = $user_id;
-    }
-
-
-    public function setStatus($status) {
-        $this->status = $status;
-    }
-
-    public function setPrixTotal($prix_total) {
-        $this->prix_total = $prix_total;
     }
 
     public function setQuantity($quantity) {

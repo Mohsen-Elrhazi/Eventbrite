@@ -110,4 +110,9 @@ if ($role==="Admin") {
 
         exit();
     }
+
+    public function getEvent(int $id){
+     $event = $this->eventRepository->findById($id);
+      return $event;
+    }
 }

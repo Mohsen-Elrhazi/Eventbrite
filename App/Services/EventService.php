@@ -51,18 +51,19 @@ class EventService
     public static function renderRowEventsParticipant(Event $event)
     {
 
-
         return "
         <div class='col-md-4 mb-4'>
             <div class='card'>
                 <img src='" . $event->getImage() . "' class='card-img-top' alt='Event Image'>
                 <div class='card-body'>
                     <h5 class='card-title'>" . $event->getTitre() . "</h5>
-                    <p class='card-text'><strong>Organizer:</strong> " . $event->getCategoryId() . "</p>
+                    <p class='card-text'><strong>Description:</strong> " . $event->getDescription() . "</p>
                     <p class='card-text'><strong>Price:</strong> $" . $event->getPrix() . "</p>
-   <form method='post' action='/event/updateEventsStatus/'>
-        <button class='btn btn-success'> details</button>
-        </form>              </div>
+            <form method='post' action='/ticket/reserverTicket/'>
+            <input type='hidden'  name='eventID' value='{$event->getId()}'>
+        <button class='btn btn-success' type='submit'> Réserver</button>
+        </form>             
+         </div>
             </div>
         </div>";
     }
