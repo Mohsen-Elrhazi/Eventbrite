@@ -2,12 +2,14 @@
 namespace App\Core;
 
 use App\Controllers\ErrorController;
+use App\Core\Middleware\AuthMiddleware;
 
 class Router{
-    private string $controller;
+    private  string $controller;
     private string $method;
     private int $param;
 
+    
     public function dispatch(){
         
         //Recuperer URL
@@ -15,9 +17,16 @@ class Router{
         
         // Diviser URL en segments
         $uri = explode('/', trim(strtolower($url), '/'));
+
+        // gerer la route error403
+        if($uri[0]==="error" && $uri[1]==="error403"){
+            $errorController=new ErrorController();
+            $errorController->error403();
+            exit;
+           }
         
         // Extraire le controller premier segment
-               $controller = $uri[0] ?? 'platform'; 
+               $controller = $uri[0] ?? '';
             if (empty($controller)) {
                 $controller = 'platform'; 
             }
@@ -32,7 +41,7 @@ class Router{
          $objectController= new $this->controller;
 
          //Extraire la methode 
-         $method= $uri[1] ?? 'platform';
+         $method= $uri[1] ?? '';
          if (empty($method)) {
             $method = 'platform'; 
         }
@@ -48,8 +57,11 @@ class Router{
          if(isset($uri[2])){
          $this->param= $uri[2];  
          }
+         
 
-
+        // Appliquer les middlewares en fonction de la route
+        $this->applyRouteMiddlewares($controller, $method);
+        
          if(method_exists($objectController, $this->method)){
             if(!empty($this->param)){
                 $objectController->{$this->method}($this->param);
@@ -61,6 +73,37 @@ class Router{
             $errorController->error404();
             exit;
          }
-         
-}
+    }
+
+  
+    private function applyRouteMiddlewares(string $controller, string $method) {
+        $routes = [
+            'AdminController' => [
+                'organisateursView' => 'Admin',
+                'participantsView' => 'Admin',
+                'eventsView' => 'Admin',
+                'categoriesView' => 'Admin',
+                'editCategorieView' => 'Admin',
+                'tagsView' => 'Admin',
+                'editTagView' => 'Admin',
+                'statistiquesView' => 'Admin',
+                'logoutView' => 'Admin',
+            ],
+            'OrganisateurController' => [
+                'eventsView' => 'Organisateur',
+                'participantsView' => 'Organisateur',
+                'statistiquesView' => 'Organisateur',
+                'logoutView' => 'Organisateur',
+            ]
+        ];
+    
+        // Verifier si le contrôleur et la méthode sont définis
+        // $routes[$controller][$method] retourne le role Admin ou Organisateur
+        if (isset($routes[$controller]) && isset($routes[$controller][$method])) {
+            AuthMiddleware::checkAuth();
+            AuthMiddleware::checkRole($routes[$controller][$method]);
+        }
+    }
+
+    
 }

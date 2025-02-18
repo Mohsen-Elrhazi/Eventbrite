@@ -1,3 +1,9 @@
+<?php
+session_start();
+use App\Controllers\EventController;
+
+$eventController = new EventController();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -11,7 +17,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="/assets/css/Platform/platform.css">
+    <link rel="stylesheet" href="/public/assets/css/Platform/platform.css">
 
 </head>
 
@@ -45,9 +51,9 @@
 
         <div class="navbar-right">
             <!-- <a href="#" class="business-link">Udemy Business</a> -->
-            <a href="/auth/auth" class="login-btn" id="login-btn">Se connecter</a>
-            <a href="/auth/auth" class="signup-btn" id="signup-btn">S'inscrire</a>
-            <a href="../../../index.php?page=logout" class="signup-btn">Logout</a>
+            <a href="/auth/login" class="login-btn" id="login-btn">Se connecter</a>
+            <a href="/auth/register" class="signup-btn" id="signup-btn">S'inscrire</a>
+            <a href="/auth/logout" class="signup-btn">Logout</a>
             <div class="cart-container">
                 <i class="fas fa-shopping-cart cart-icon"></i>
                 <span class="cart-badge">0</span>
@@ -168,7 +174,9 @@
         <h2 style="text-align:center;">Events </h2>
 
         <div class='cards-cours'>
-
+            <?php
+            $eventController->displayEvents();
+            ?>
         </div>
     </section>
     <!--fin affichage des courses -->
@@ -259,7 +267,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
 
-    <script src="/assets/js/Platform/platform.js">
+    <script src="/public/assets/js/Platform/platform.js">
     </script>
 
 

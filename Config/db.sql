@@ -47,7 +47,6 @@ CREATE TABLE event_user (
     CONSTRAINT fk_event FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE,
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
-
 --! pas encore creer dans base de données
 CREATE TABLE tickets (
     ticket_id SERIAL PRIMARY KEY,
@@ -58,7 +57,6 @@ CREATE TABLE tickets (
     CONSTRAINT fk_event FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE,
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
-
 --! pas encore creer dans base de données
 CREATE TABLE payments (
     payment_id SERIAL PRIMARY KEY,
@@ -71,3 +69,40 @@ CREATE TABLE payments (
     CONSTRAINT fk_ticket FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id) ON DELETE CASCADE,
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
+--! Modification du tableau `events` pour ajouter de nouvelles colonnes  
+ALTER TABLE events  
+ADD COLUMN description TEXT NOT NULL,  
+ADD COLUMN event_date DATE NOT NULL,  
+ADD COLUMN heure_debut TIME NOT NULL,  
+ADD COLUMN heure_fin TIME NOT NULL,  
+ADD COLUMN prix DECIMAL(10,2) DEFAULT 0.00;  
+
+-- Modification du tableau tickets : ajout de colonnes pour le prix total, la quantité et la mise à jour du timestamp
+ALTER TABLE tickets
+ADD COLUMN prix_total DECIMAL(10, 2) DEFAULT 0.00,  
+ADD COLUMN quantity INT DEFAULT 1,  
+
+
+
+
+-- amine----------------
+ALTER TABLE events
+ADD COLUMN status VARCHAR(20) NOT NULL CHECK (status IN ('Active', 'Inactive', 'Pending'));
+-- amine----------------
+
+
+-- !MOHSEN----------
+-- ajouter column 
+alter table event_user
+ Add column enrolled_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+-- drop column
+ alter table event_user
+drop column role
+
+-- afficher les user organisateur qui cree un cours ou particpant qui inscris dans un cours
+select u.nom ,e.titre from users u 
+inner join event_user eu on u.user_id = eu.user_id
+inner join events e on e.event_id = eu.event_id
+where u.role = 'Organisateur';
+-- !MOHSEN----------
